@@ -1,0 +1,27 @@
+[
+    {
+        "module": "account",
+        "class": "Account",
+        "plural": "accounts"
+    },
+    {
+        "module": "score",
+        "class": "Score",
+        "plural": "scores"
+    },
+    {
+        "module": "theme",
+        "class": "Theme",
+        "plural": "themes"
+    },
+    {
+        "module": "achievement",
+        "class": "Achievement",
+        "plural": "achievements"
+    },
+    {
+        "module": "guest",
+        "class": "Guest",
+        "plural": "guests"
+    }
+]
