@@ -27,8 +27,8 @@ class AccountService:
 
         return dto.AccountDto.from_entity(account)
 
-
     def get_account(self, id: UUID) -> dto.AccountDto:
+        validate(self.app_context, AdminOrSameUserPermission(AccountType.ADMIN, id))
         
         account = self.account_repository.find_by_id(id)
         if account is None:

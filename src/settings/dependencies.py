@@ -18,7 +18,7 @@ def __init_bunnet():
     models = [
         "account.infrastructure.mongo_repository.DBAccount",
         "theme.infrastructure.mongo_repository.DBTheme",
-        "guest.infrastructure.mongo_repository.DBGuest",
-        "achievement.infrastructure.mongo_repository.DBAchievement",
+        "player.infrastructure.mongo_guest_repository.DBGuest",
+        "player.infrastructure.mongo_achievement_repository.DBAchievement",
     ]
     init_bunnet(database, document_models=models)

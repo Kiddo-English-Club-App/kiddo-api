@@ -3,7 +3,6 @@ from flask import request
 
 from shared.app_context import AppContext
 from shared.exceptions import Unauthorized
-from ..domain.account_type import AccountPermissionsMapping
 from ..application.token_service import TokenService
 
 
@@ -42,17 +41,3 @@ class RequestAppContext(AppContext):
             return True
         except Unauthorized:
             return False
-        
-    def authorized(self, all_: list[str] =  None, any_: list[str] = None) -> bool:
-        if not self.authenticated():
-            return False
-        
-        account_type = self.account_type()
-        
-        if all_ is None and any_ is None:
-            return True
-        
-        all_permissions = all_ and all([permission in AccountPermissionsMapping[account_type] for permission in all_])
-        any_permissions = any_ and any([permission in AccountPermissionsMapping[account_type] for permission in any_])
-
-        return all_permissions and any_permissions

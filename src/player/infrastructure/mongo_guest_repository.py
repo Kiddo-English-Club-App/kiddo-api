@@ -5,11 +5,11 @@ from pydantic import Field, BaseModel
 from uuid import UUID
 
 
-from theme.domain.theme_repository import IThemeRepository
-from achievement.domain.achievement_repository import IAchievementRepository
-from guest.domain.guest import Guest, Score
-from guest.domain.guest_repository import IGuestRepository, Guest
 from shared.range import Range
+from theme.domain.theme_repository import IThemeRepository
+from ..domain.achievement_repository import IAchievementRepository
+from ..domain.guest import Guest, Score
+from ..domain.guest_repository import IGuestRepository, Guest
 
 
 class DBRange(BaseModel):

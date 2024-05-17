@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from dependify import inject
 
-from score.application.score_service import ScoreService, dto
+from player.application.score_service import ScoreService, dto
 
 
 controller = Blueprint('score', __name__, url_prefix='/scores')

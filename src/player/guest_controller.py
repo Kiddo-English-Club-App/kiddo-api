@@ -2,8 +2,7 @@ from uuid import UUID
 from flask import Blueprint, request
 from dependify import inject
 
-from guest.application.guest_service import GuestService, dto
-from achievement.application.achievement_service import AchievementService
+from player.application.guest_service import GuestService, dto
 
 controller = Blueprint('guest', __name__, url_prefix='/guests')
 # TODO: Add authentication middleware
@@ -31,7 +30,7 @@ def create_guest(service: GuestService):
 
 @controller.get('/<uuid:guest_id>/achievements')
 @inject
-def get_guest_achievements(service: AchievementService, guest_id: UUID):
+def get_guest_achievements(service: GuestService, guest_id: UUID):
     compute = request.args.get('compute', '0')
     compute = compute == '1'
     achievements = service.get_guest_achievements(guest_id, compute)

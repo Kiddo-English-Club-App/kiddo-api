@@ -23,5 +23,10 @@
         "module": "guest",
         "class": "Guest",
         "plural": "guests"
+    },
+    {
+        "module": "player",
+        "plural": "players",
+        "class": "Player"
     }
 ]

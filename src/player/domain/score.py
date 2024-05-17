@@ -31,7 +31,7 @@ class Score:
         self.elements = elements
         self.theme = theme
     
-    def add(self, points: int, time: float) -> None:
+    def update(self, points: int, time: float) -> None:
         _points = self.points.current
         _time = self.time.current
         _points = (_points * self.elements + points) / (self.elements + 1)

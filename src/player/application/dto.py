@@ -2,8 +2,34 @@ from uuid import UUID
 from pydantic import BaseModel
 
 from ..domain.score import Score
+from ..domain.achievement import Achievement
+from ..domain.guest import Guest
 
 
+# Guest DTOs
+class GuestDto(BaseModel):
+    id: UUID
+    host: UUID
+    name: str
+    image: str
+
+    @staticmethod
+    def from_entity(guest: Guest):
+        return GuestDto(
+            id=guest.id,
+            name=guest.name,
+            host=guest.host,
+            image=guest.image
+        )
+
+
+class CreateGuestDto(BaseModel):
+    host: UUID
+    name: str
+    image: str
+
+
+# Score DTOs
 class ScoreDto(BaseModel):
     guest_id: UUID
     points: float
@@ -51,3 +77,18 @@ class ReportDto(BaseModel):
     top_scores: list[ScoreDataDto]
     bottom_scores: list[ScoreDataDto]
 
+
+# Achievement DTOs
+class AchievementDto(BaseModel):
+    id: UUID
+    theme: str
+    value: float
+    message: str
+
+    @staticmethod
+    def from_entity(achievement: Achievement) -> "AchievementDto":
+        return AchievementDto(
+            id=achievement.id, 
+            theme=achievement.theme.value.name, 
+            value=achievement.value,
+            message=str(achievement))
