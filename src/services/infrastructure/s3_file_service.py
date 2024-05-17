@@ -23,8 +23,8 @@ class S3FileService(FileService):
         self.app_context = app_context
 
     def get_file(self, file_name: str) -> File:
-        #if not self.app_context.authenticated():
-        #    raise Unauthorized("Not authenticated")
+        if not self.app_context.authenticated():
+            raise Unauthorized("Not authenticated")
         
         if os.path.exists(f"cache/{file_name}"):
             with open(f"cache/{file_name}", "rb") as file:
