@@ -39,6 +39,9 @@ class Achievement(ABC):
     def check(self, score: Score) -> bool:
         pass
 
+    def __eq__(self, value: object) -> bool:
+        return isinstance(value, Achievement) and value.id == self.id
+
 
 class PointsAchievement(Achievement):
     """

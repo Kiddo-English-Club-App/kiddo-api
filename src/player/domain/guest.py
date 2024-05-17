@@ -48,10 +48,17 @@ class Guest:
 
     def update_achievements(self, achievements: list[Achievement]) -> None:
         for achievement in achievements:
-            if self.check_achievement(achievement):
-                self.achievements.append(achievement)
+            if achievement in self.achievements:
+                continue
+
+            for score in self.scores:
+                if achievement.check(score):
+                    self.achievements.append(achievement)
 
     def create_report(self, number: int = 3) -> Report:
+        if len(self.scores) == 0:
+            return Report(0, 0, [], [])
+        
         scores = self.scores.copy()
         avg_points = sum([score.points.current for score in scores])/len(scores)
         avg_time = sum([score.time.current for score in scores])/len(scores)
