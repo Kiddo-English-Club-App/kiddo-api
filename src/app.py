@@ -21,6 +21,7 @@ def load_controllers(app: Flask):
 def create_app() -> Flask:
     app = Flask(__name__)
     import settings
+    import settings.environment as environment
 
     settings.init(app)
     load_controllers(app)

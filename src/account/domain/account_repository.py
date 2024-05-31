@@ -1,9 +1,9 @@
 """
 Account Repository Interface Definition.
 """
-from uuid import UUID
 from abc import ABC, abstractmethod
 
+from shared.id import Id
 from shared.reference import Ref
 from .account import Account
 
@@ -14,12 +14,12 @@ class IAccountRepository(ABC):
     """
 
     @abstractmethod
-    def find_by_id(self, id: UUID) -> Account | None:
+    def find_by_id(self, id: Id) -> Account | None:
         """
         Finds an account by its id.
 
         Args:
-            id (UUID): The id of the account.
+            id (Id): The id of the account.
         
         Returns:
             The account entity if found, None otherwise.
@@ -47,7 +47,7 @@ class IAccountRepository(ABC):
         pass
 
     @abstractmethod
-    def delete_by_id(self, id: UUID) -> bool:
+    def delete_by_id(self, id: Id) -> bool:
         """
         Deletes an account by its id.
 
@@ -73,7 +73,7 @@ class IAccountRepository(ABC):
         pass
 
     @abstractmethod
-    def ref(self, id: UUID) -> Ref[Account]:
+    def ref(self, id: Id) -> Ref[Account]:
         """
         Creates a reference to an account entity.
 
@@ -90,7 +90,7 @@ class AccountRef(Ref[Account]):
     """
     Account Reference.
     """
-    def __init__(self, id: UUID, repository: IAccountRepository):
+    def __init__(self, id: Id, repository: IAccountRepository):
         super().__init__(id)
         self.__repository = repository
     

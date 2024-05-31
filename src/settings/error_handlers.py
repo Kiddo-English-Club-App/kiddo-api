@@ -10,10 +10,10 @@ def handle_domain_exception(error: exc.DomainException):
         case exc.NotFound.title:
             status_code = 404
 
-        case exc.Unauthorized.title:
+        case exc.Unauthenticated.title:
             status_code = 401
 
-        case exc.Forbidden.title:
+        case exc.Unauthorized.title:
             status_code = 403
         case _:
             status_code = 400

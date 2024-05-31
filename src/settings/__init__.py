@@ -1,9 +1,10 @@
 def init(app):
-    from . import environment, dependencies, error_handlers
+    from . import environment, dependencies, error_handlers, logs
     """
     Initialize the module
     """
     environment.init(app)
+    logs.init()
     dependencies.init(app)
     error_handlers.init(app)
     

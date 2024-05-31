@@ -1,12 +1,11 @@
 # Domain model
-from uuid import UUID, uuid4
-
+from shared.id import Id
 from .password import Password
-from .account_type import AccountType
+from shared.account_type import AccountType
 
 
 class Account:
-    id: UUID
+    id: Id
     first_name: str
     last_name: str
     email: str
@@ -19,11 +18,11 @@ class Account:
             last_name: str,
             email: str,
             password: Password | str,
-            id: UUID = uuid4(),
+            id: Id = None,
             account_type: AccountType = AccountType.USER
             ):
 
-        self.id = id
+        self.id = id if isinstance(id, Id) else Id(id)
         self.first_name = first_name.strip()
         self.last_name = last_name.strip()
         self.email = email.strip()

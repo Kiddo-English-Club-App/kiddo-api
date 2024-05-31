@@ -1,14 +1,14 @@
-from uuid import UUID, uuid4
+from shared.id import Id
 
 
 class Item:
-    id: UUID
+    id: Id
     name: str
     image: str
     sound: str
 
-    def __init__(self, name: str, image: str, sound: str, id: UUID = uuid4()):
-        self.id = id
+    def __init__(self, name: str, image: str, sound: str, id: Id = None):
+        self.id = id if isinstance(id, Id) else Id(id)
         self.name = name
         self.image = image
         self.sound = sound

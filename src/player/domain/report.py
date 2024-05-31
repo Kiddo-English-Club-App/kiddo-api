@@ -2,13 +2,20 @@ from .score import Score
 
 
 class Report:
-    avg_time: float
-    avg_points: float
-    top_scores: list[Score]
-    bottom_scores: list[Score]
+    avg_time: float = 0
+    avg_points: float = 0
+    top_scores: list[Score] = []
+    bottom_scores: list[Score] = []
 
-    def __init__(self, avg_time: float, avg_points: float, top_scores: list[Score], bottom_scores: list[Score]) -> None:
-        self.avg_time = avg_time
-        self.avg_points = avg_points
-        self.top_scores = top_scores
-        self.bottom_scores = bottom_scores
+    def __init__(self, scores: list[Score], number: int = 3) -> None:
+        if len(scores) == 0:
+            return
+        
+        number = min(number, len(scores))
+        
+        scores.sort(key=lambda x: x.points.current, reverse=True)
+
+        self.avg_time = sum([score.time.current for score in scores])/len(scores)
+        self.avg_points = sum([score.points.current for score in scores])/len(scores)
+        self.top_scores = scores[:number]
+        self.bottom_scores = scores[-number:]

@@ -1,11 +1,10 @@
 # Domain model
-from uuid import UUID, uuid4
-
+from shared.id import Id
 from .item import Item
 
 
 class Theme:
-    id: UUID
+    id: Id
     name: str
     description: str
     image: str
@@ -19,10 +18,10 @@ class Theme:
             image: str, 
             background: str,
             items: list[Item] = [],
-            id: UUID = uuid4() 
+            id: Id = None 
             ):
         
-        self.id = id
+        self.id = id if isinstance(id, Id) else Id()
         self.name = name
         self.description = description
         self.image = image

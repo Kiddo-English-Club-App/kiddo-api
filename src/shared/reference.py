@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
-from uuid import UUID
+from shared.id import Id
 
 
 class Ref[T](ABC):
-    id: UUID
+    id: Id
     __value: T
 
-    def __init__(self, id: UUID):
+    def __init__(self, id: Id):
         self.id = id
         self.__value = None
 

@@ -1,15 +1,17 @@
-from uuid import UUID
-from pydantic import BaseModel
+from typing import Protocol
+from dataclasses import dataclass
 
+from shared.id import Id
 from ..domain.score import Score
 from ..domain.achievement import Achievement
 from ..domain.guest import Guest
 
 
 # Guest DTOs
-class GuestDto(BaseModel):
-    id: UUID
-    host: UUID
+@dataclass(kw_only=True)
+class GuestDto:
+    id: Id
+    host: Id
     name: str
     image: str
 
@@ -23,22 +25,23 @@ class GuestDto(BaseModel):
         )
 
 
-class CreateGuestDto(BaseModel):
-    host: UUID
+class CreateGuestDto(Protocol):
+    host: Id
     name: str
     image: str
 
 
 # Score DTOs
-class ScoreDto(BaseModel):
-    guest_id: UUID
+@dataclass(kw_only=True)
+class ScoreDto:
+    guest_id: Id
     points: float
     time: float
     elements: int
-    theme_id: UUID
+    theme_id: Id
 
     @staticmethod
-    def from_entity(score: Score, guest_id: UUID):
+    def from_entity(score: Score, guest_id: Id):
         return ScoreDto(
             guest_id=guest_id,
             points=score.points.current,
@@ -48,14 +51,15 @@ class ScoreDto(BaseModel):
         )
 
 
-class AddScoreDto(BaseModel):
-    guest_id: UUID
+class AddScoreDto(Protocol):
+    guest_id: Id
+    theme_id: Id
     points: int
     time: int
-    theme_id: UUID
 
 
-class ScoreDataDto(BaseModel):
+@dataclass(kw_only=True)
+class ScoreDataDto:
     points: float
     time: float
     elements: int
@@ -70,8 +74,9 @@ class ScoreDataDto(BaseModel):
         )
 
 
-class ReportDto(BaseModel):
-    guest_id: UUID
+@dataclass(kw_only=True)
+class ReportDto:
+    guest_id: Id
     avg_points: float
     avg_time: float
     top_scores: list[ScoreDataDto]
@@ -79,8 +84,9 @@ class ReportDto(BaseModel):
 
 
 # Achievement DTOs
-class AchievementDto(BaseModel):
-    id: UUID
+@dataclass(kw_only=True)
+class AchievementDto:
+    id: Id
     theme: str
     value: float
     message: str

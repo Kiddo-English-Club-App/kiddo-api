@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from uuid import UUID
 
+from shared.id import Id
 from shared.reference import Ref
 from .theme import Theme
 
@@ -8,7 +8,7 @@ from .theme import Theme
 class IThemeRepository(ABC):
     
     @abstractmethod
-    def find_by_id(self, id: UUID) -> Theme:
+    def find_by_id(self, id: Id) -> Theme:
         pass
 
     @abstractmethod
@@ -20,17 +20,17 @@ class IThemeRepository(ABC):
         pass
 
     @abstractmethod
-    def delete_by_id(self, id: UUID) -> bool:
+    def delete_by_id(self, id: Id) -> bool:
         pass
     
     @abstractmethod
-    def ref(self, id: UUID) -> Ref[Theme]:
+    def ref(self, id: Id) -> Ref[Theme]:
         pass
 
 
 class ThemeRef(Ref[Theme]):
     
-    def __init__(self, id: UUID, repository: IThemeRepository):
+    def __init__(self, id: Id, repository: IThemeRepository):
         super().__init__(id)
         self._repository = repository
 

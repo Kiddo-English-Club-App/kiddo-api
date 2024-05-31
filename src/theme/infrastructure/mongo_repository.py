@@ -3,6 +3,8 @@ from bunnet import Document
 from pydantic import Field, BaseModel
 from uuid import UUID
 
+
+from shared.id import Id
 from shared.reference import Ref
 from ..domain.item import Item
 from ..domain.theme import Theme
@@ -17,7 +19,7 @@ class DBItem(BaseModel):
     @staticmethod
     def from_entity(entity: Item):
         return DBItem(
-            id=entity.id,
+            id=entity.id.value,
             name=entity.name,
             image=entity.image,
             sound=entity.sound
@@ -25,7 +27,7 @@ class DBItem(BaseModel):
     
     def to_entity(self) -> Item:
         return Item(
-            id=self.id,
+            id=Id(self.id),
             name=self.name,
             image=self.image,
             sound=self.sound
@@ -46,7 +48,7 @@ class DBTheme(Document, Theme):
     @staticmethod
     def from_entity(entity: Theme):
         return DBTheme(
-            id=entity.id,
+            id=entity.id.value,
             name=entity.name,
             description=entity.description,
             image=entity.image,
@@ -56,7 +58,7 @@ class DBTheme(Document, Theme):
     
     def to_entity(self) -> Theme:
         return Theme(
-            id=self.id,
+            id=Id(self.id),
             name=self.name,
             description=self.description,
             image=self.image,
@@ -67,8 +69,8 @@ class DBTheme(Document, Theme):
 
 class MongoDBThemeRepository(IThemeRepository):
 
-    def find_by_id(self, id: UUID) -> Theme:
-        _theme = DBTheme.find_one({"_id": id}).run()
+    def find_by_id(self, id: Id) -> Theme:
+        _theme = DBTheme.find_one({"_id": id.value}).run()
         if not _theme:
             return None
         return _theme.to_entity()
@@ -81,9 +83,9 @@ class MongoDBThemeRepository(IThemeRepository):
         _theme = DBTheme.from_entity(entity)
         _theme.save()
 
-    def delete_by_id(self, id: UUID) -> bool:
-        results = DBTheme.get_motor_collection().delete_one({"_id": id})
+    def delete_by_id(self, id: Id) -> bool:
+        results = DBTheme.get_motor_collection().delete_one({"_id": id.value})
         return results.deleted_count > 0
     
-    def ref(self, id: UUID) -> Ref[Theme]:
+    def ref(self, id: Id) -> Ref[Theme]:
         return ThemeRef(id, self)

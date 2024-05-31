@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from uuid import UUID
+
+from shared.id import Id
 
 from .achievement import Achievement
 
@@ -11,15 +12,15 @@ class IAchievementRepository(ABC):
         pass
 
     @abstractmethod
-    def find_by_id(self) -> list[Achievement]:
+    def find_by_id(self, id: Id) -> list[Achievement]:
         pass
 
     @abstractmethod
-    def find_many(self, ids: list[UUID]) -> list[Achievement]:
+    def find_many(self, ids: list[Id]) -> list[Achievement]:
         pass
 
     @abstractmethod
-    def find_not_in(self, ids: list[UUID]) -> list[Achievement]:
+    def find_not_in(self, ids: list[Id]) -> list[Achievement]:
         pass
 
     @abstractmethod

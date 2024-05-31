@@ -1,11 +1,13 @@
-from pydantic import BaseModel
+from dataclasses import dataclass
+
+from shared.id import Id
 
 from ..domain.item import Item
 from ..domain.theme import Theme
 
-
-class ItemDto(BaseModel):
-    id: str
+@dataclass(kw_only=True)
+class ItemDto:
+    id: Id
     name: str
     image: str
     sound: str
@@ -13,15 +15,16 @@ class ItemDto(BaseModel):
     @staticmethod
     def from_enitity(item: Item):
         return ItemDto(
-            id=str(item.id),
+            id=item.id,
             name=item.name,
             image=item.image,
             sound=item.sound
         )
 
 
-class ThemeDto(BaseModel):
-    id: str
+@dataclass(kw_only=True)
+class ThemeDto:
+    id: Id
     name: str
     description: str
     image: str
@@ -31,7 +34,7 @@ class ThemeDto(BaseModel):
     @staticmethod
     def from_entity(theme: Theme):
         return ThemeDto(
-            id=str(theme.id),
+            id=theme.id,
             name=theme.name,
             description=theme.description,
             image=theme.image,

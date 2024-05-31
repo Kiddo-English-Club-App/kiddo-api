@@ -4,52 +4,54 @@ class DomainException(Exception):
     """
     message: str
     title: str
-    def __init__(self, message, title = "bad_request"):
+    def __init__(self, message, title = "error"):
         self.message = message
         self.title = title
         super().__init__(message)
 
 
-class Unauthorized(DomainException):
-    message: str = "Unauthorized"
+class MessageException(DomainException):
+    def __init__(self, message: str = None):
+        if message is not None:
+            self.message = message
+        super().__init__(self.message, self.title)
+
+
+class Unauthenticated(MessageException):
+    message: str = "Not authenticated"
     title: str = "unauthorized"
-    def __init__(self, message = "Unauthorized"):
-        super().__init__(message, "unauthorized")
 
 
-class Forbidden(DomainException):
+class Unauthorized(MessageException):
     message: str = "Forbidden"
     title: str = "forbidden"
 
-    def __init__(self, message = "Forbidden"):
-        super().__init__(message, "forbidden")
 
-
-class NotFound(DomainException):
+class NotFound(MessageException):
     message: str = "Not found"
     title: str = "not_found"
 
-    def __init__(self, message = "Not found"):
-        super().__init__(message, "not_found")
 
-
-class ValidationError(DomainException):
+class ValidationError(MessageException):
     message: str = "Validation error"
     title: str = "validation_error"
 
-    def __init__(self, message = "Validation error"):
-        super().__init__(message, "validation_error")
 
-
-class InvalidCredentials(DomainException):
+class InvalidCredentials(MessageException):
     message: str = "Invalid credentials"
     title: str = "invalid_credentials"
-    def __init__(self, message = "Invalid credentials"):
-        super().__init__(message, "invalid_credentials")
 
 
-class InvalidToken(DomainException):
+class InvalidToken(MessageException):
     message: str = "Invalid token"
     title: str = "invalid_token"
-    def __init__(self, message = "Invalid token"):
-        super().__init__(message, "invalid_token")
+
+
+class InvalidPassword(MessageException):
+    message: str = "Invalid password"
+    title: str = "invalid_password"
+
+
+class AlreadyExists(MessageException):
+    message: str = "Already exists"
+    title: str = "already_exists"

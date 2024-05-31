@@ -5,6 +5,7 @@ from pydantic import Field, BaseModel
 from uuid import UUID
 
 
+from shared.id import Id
 from shared.range import Range
 from theme.domain.theme_repository import IThemeRepository
 from ..domain.achievement_repository import IAchievementRepository
@@ -46,7 +47,7 @@ class DBScore(BaseModel):
             points=self.points.to_range(),
             time=self.time.to_range(), 
             elements=self.elements, 
-            theme=theme_repository.ref(self.theme))
+            theme=theme_repository.ref(Id(self.theme)))
 
     @staticmethod
     def from_entity(entity: Score) -> "DBScore":
@@ -57,7 +58,7 @@ class DBScore(BaseModel):
             points=points, 
             time=time, 
             elements=entity.elements, 
-            theme=entity.theme.id)  
+            theme=entity.theme.id.value)  
 
 
 class DBGuest(Document):
@@ -75,11 +76,12 @@ class DBGuest(Document):
     def to_entity(
             self,
             achievement_repository: IAchievementRepository) -> Guest:
-        achievements = achievement_repository.find_many(self.achievements)
+        achievements_ids = [Id(achievement) for achievement in self.achievements]
+        achievements = achievement_repository.find_many(achievements_ids)
 
         return Guest(
-            id=self.id,
-            host=self.host,
+            id=Id(self.id),
+            host=Id(self.host),
             name=self.name,
             image=self.image,
             scores=[score.to_entity() for score in self.scores],
@@ -89,32 +91,32 @@ class DBGuest(Document):
     @staticmethod
     def from_entity(entity: Guest) -> "DBGuest":
         return DBGuest(
-            id=entity.id, 
-            host=entity.host, 
+            id=entity.id.value, 
+            host=entity.host.value, 
             name=entity.name, 
             image=entity.image,
             scores=[DBScore.from_entity(score) for score in entity.scores],
-            achievements=[achievement.id for achievement in entity.achievements]
+            achievements=[achievement.id.value for achievement in entity.achievements]
         )
 
 
 
 class MongoDBGuestRepository(IGuestRepository):
 
-    def find_by_id(self, id: UUID) -> Guest:
-        _guest = DBGuest.find_one({"_id": id}).run()
+    def find_by_id(self, id: Id) -> Guest:
+        _guest = DBGuest.find_one({"_id": id.value}).run()
         if not _guest:
             return None
         return _guest.to_entity()
     
-    def find_all(self, host: UUID) -> list[Guest]:
-        _guests = DBGuest.find({"host": host}).run()
+    def find_all(self, host: Id) -> list[Guest]:
+        _guests = DBGuest.find({"host": host.value}).run()
         return [_guest.to_entity() for _guest in _guests]
     
     def save(self, entity: Guest) -> None:
         _guest = DBGuest.from_entity(entity)
         _guest.save()
 
-    def delete_by_id(self, id: UUID) -> bool:
-        results = DBGuest.get_motor_collection().delete_one({"_id": id})
+    def delete_by_id(self, id: Id) -> bool:
+        results = DBGuest.get_motor_collection().delete_one({"_id": id.value})
         return results.deleted_count > 0

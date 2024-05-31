@@ -3,6 +3,7 @@ from bunnet import Document
 from pydantic import Field
 from dependify import inject
 
+from shared.id import Id
 from theme.domain.theme_repository import IThemeRepository
 from ..domain.achievement import Achievement, AchievementFactory
 from ..domain.achievement_repository import IAchievementRepository
@@ -20,15 +21,15 @@ class DBAchievement(Document):
     @inject
     def to_entity(self, theme_repo: IThemeRepository) -> Achievement:
         return AchievementFactory().create(
-            id=self.id,
-            theme=theme_repo.ref(self.theme),
+            id=Id(self.id),
+            theme=theme_repo.ref(Id(self.theme)),
             key=self.key,
             value=self.value
         )
 
     @staticmethod
     def from_entity(entity: Achievement) -> "DBAchievement":
-        return DBAchievement(id=entity.id, theme=entity.theme, value=entity.value, key=entity._type())
+        return DBAchievement(id=entity.id.value, theme=entity.theme.id.value, value=entity.value, key=entity._type())
 
 
 
@@ -41,16 +42,18 @@ class MongoDBAchievementRepository(IAchievementRepository):
     def save(self, entity: Achievement) -> None:
         DBAchievement.from_entity(entity).save()
     
-    def find_by_id(self, id: UUID) -> Achievement:
-        achievement = DBAchievement.find_one(id=id).run()
+    def find_by_id(self, id: Id) -> Achievement:
+        achievement = DBAchievement.find_one(id=id.value).run()
         if not achievement:
             return None
         return achievement.to_entity()
     
-    def find_many(self, ids: list[UUID]) -> list[Achievement]:
-        achievements = DBAchievement.find({"_id": {"$in": ids}}).run()
+    def find_many(self, ids: list[Id]) -> list[Achievement]:
+        query = {"_id": {"$in": [id.value for id in ids]}}
+        achievements = DBAchievement.find(query).run()
         return [achievement.to_entity() for achievement in achievements]
     
-    def find_not_in(self, ids: list[UUID]) -> list[Achievement]:
-        achievements = DBAchievement.find({"_id": {"$nin": ids}}).run()
+    def find_not_in(self, ids: list[Id]) -> list[Achievement]:
+        query = {"_id": {"$nin": [id.value for id in ids]}}
+        achievements = DBAchievement.find(query).run()
         return [achievement.to_entity() for achievement in achievements]

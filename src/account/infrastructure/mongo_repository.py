@@ -2,8 +2,9 @@ from bunnet import Document
 from pydantic import Field, EmailStr
 from uuid import UUID
 
+from shared.id import Id
 from shared.reference import Ref
-from ..domain.account_type import AccountType
+from shared.account_type import AccountType
 from ..domain.password import Password
 from ..domain.account import Account
 from ..domain.account_repository import IAccountRepository, AccountRef
@@ -24,7 +25,7 @@ class DBAccount(Document):
 
     def from_entity(entity: Account):
         return DBAccount(
-            id=entity.id,
+            id=entity.id.value,
             first_name=entity.first_name,
             last_name=entity.last_name,
             email=entity.email,
@@ -34,7 +35,7 @@ class DBAccount(Document):
 
     def to_entity(self) -> Account:
         return Account(
-            id=self.id,
+            id=Id(self.id),
             first_name=self.first_name,
             last_name=self.last_name,
             email=self.email,
@@ -45,8 +46,8 @@ class DBAccount(Document):
 
 class MongoDBAccountRepository(IAccountRepository):
 
-    def find_by_id(self, id: UUID) -> Account:
-        _account = DBAccount.find_one({"_id": id}).run()
+    def find_by_id(self, id: Id) -> Account:
+        _account = DBAccount.find_one({"_id": id.value}).run()
         if not _account:
             return None
         return _account.to_entity()
@@ -59,8 +60,8 @@ class MongoDBAccountRepository(IAccountRepository):
         _account = DBAccount.from_entity(entity)
         _account.save()
 
-    def delete_by_id(self, id: UUID) -> bool:
-        results = DBAccount.get_motor_collection().delete_one({"_id": id})
+    def delete_by_id(self, id: Id) -> bool:
+        results = DBAccount.get_motor_collection().delete_one({"_id": id.value})
         return results.deleted_count > 0
     
     def find_by_email(self, email: str) -> Account:
@@ -69,5 +70,5 @@ class MongoDBAccountRepository(IAccountRepository):
             return None
         return _account.to_entity()
     
-    def ref(self, id: UUID) -> Ref[Account]:
+    def ref(self, id: Id) -> Ref[Account]:
         return AccountRef(id, self)

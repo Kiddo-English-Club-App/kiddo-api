@@ -4,7 +4,7 @@ from botocore.exceptions import ClientError
 
 from settings.environment import env
 from shared.app_context import AppContext
-from shared.exceptions import NotFound, Unauthorized
+from shared.exceptions import NotFound, Unauthenticated
 from services.application.file_service import File
 from ..application.file_service import FileService
 
@@ -24,7 +24,7 @@ class S3FileService(FileService):
 
     def get_file(self, file_name: str) -> File:
         if not self.app_context.authenticated():
-            raise Unauthorized("Not authenticated")
+            raise Unauthenticated("Not authenticated")
         
         if os.path.exists(f"cache/{file_name}"):
             with open(f"cache/{file_name}", "rb") as file:

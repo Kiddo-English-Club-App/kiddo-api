@@ -1,9 +1,8 @@
 # Account service
-from uuid import UUID
-
 from account.domain.account import Account, AccountType
 from account.domain.account_repository import IAccountRepository
-from shared.exceptions import InvalidCredentials, NotFound
+from shared.id import Id
+from shared.exceptions import InvalidCredentials, NotFound, AlreadyExists
 from shared.app_context import AppContext
 from shared.permissions import AdminOrSameUserPermission, validate
 from . import dto
@@ -16,6 +15,10 @@ class AccountService:
         self.app_context = app_context
 
     def create_account(self, data: dto.CreateAccountDto) -> dto.AccountDto:
+
+        if self.account_repository.find_by_email(data.email):
+            raise AlreadyExists("Account already exists")
+
         account = Account(
             first_name=data.first_name,
             last_name=data.last_name,
@@ -27,7 +30,7 @@ class AccountService:
 
         return dto.AccountDto.from_entity(account)
 
-    def get_account(self, id: UUID) -> dto.AccountDto:
+    def get_account(self, id: Id) -> dto.AccountDto:
         validate(self.app_context, AdminOrSameUserPermission(AccountType.ADMIN, id))
         
         account = self.account_repository.find_by_id(id)

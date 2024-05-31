@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 from uuid import UUID, uuid4
 from typing import Callable, Protocol
 
+from shared.id import Id
 from shared.reference import Ref
 from shared.range import Range
 
@@ -22,21 +23,23 @@ class Score(Protocol):
 
 
 class Achievement(ABC):
-    id: UUID
+    id: Id
     theme: Ref[Theme]
     value: float
 
-    def __init__(self, theme: Ref[Theme], value: float, id: UUID = uuid4()):
-        self.id = id
+    def __init__(self, theme: Ref[Theme], value: float, id: Id = None):
+        self.id = id if isinstance(id, Id) else Id(id)
         self.theme = theme
         self.value = value
 
     @abstractmethod
     def key() -> str:
+        # Key to identify the type of achievement in the factory
         pass
 
     @abstractmethod
     def check(self, score: Score) -> bool:
+        # Check if the score meets the requirements of the achievement
         pass
 
     def __eq__(self, value: object) -> bool:
@@ -101,6 +104,6 @@ class AchievementFactory:
     def __getitem__(self, key: str) -> Callable[..., Achievement]:
         return self.__creators[key]
     
-    def create(self, key: str, theme: Ref[Theme], value: float, id: UUID = uuid4()) -> Achievement:
+    def create(self, key: str, theme: Ref[Theme], value: float, id: Id= None) -> Achievement:
         return self.__creators[key](
             theme=theme, value=value, id=id)

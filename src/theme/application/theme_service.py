@@ -1,6 +1,5 @@
 # Theme service
-from uuid import UUID
-
+from shared.id import Id
 from shared.app_context import AppContext
 from shared.exceptions import NotFound
 from shared.permissions import AuthenticatedPermission, validate
@@ -19,7 +18,7 @@ class ThemeService:
         themes = self.theme_repository.find_all()
         return [dto.ThemeDto.from_entity(theme) for theme in themes]
 
-    def get_theme(self, theme_id: UUID) -> dto.ThemeDto:
+    def get_theme(self, theme_id: Id) -> dto.ThemeDto:
         validate(self.app_context, AuthenticatedPermission())
         theme = self.theme_repository.find_by_id(theme_id)
 
