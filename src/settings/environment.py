@@ -21,13 +21,14 @@ class Environment:
     S3_SECRET_KEY: str
     S3_REGION_NAME: str
     S3_BUCKET_NAME: str
+    MOCK_DIR: str = "mock"
 
 env = Environment()
 
 def init(app):
     import os
     from dotenv import load_dotenv
-    load_dotenv()
+    load_dotenv(override=True)
 
     env.MONGO_URI = os.getenv("KIDDO_MONGO_URI")
     env.MONGO_DB_NAME = os.getenv("KIDDO_MONGO_DB_NAME")

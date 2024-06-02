@@ -59,15 +59,16 @@ class TestCreateGuest(unittest.TestCase):
 class TestGetGuest(unittest.TestCase):
 
     def test_get_guest(self):
+        # Given a guest
         mocked_guest = mock_guest()
         mock = Mock()
         mock.find_by_id.return_value = mocked_guest
-
+        # And a logged in user
         mock = mock_app_context(mock, mocked_guest.host, ac_type=AccountType.USER)
-        
+        # When the guest is retrieved
         service = GuestService(mock, mock, mock)
         guest = service.get_guest(mocked_guest.id)
-
+        # Then the guest is returned
         self.assertEqual(mocked_guest.id, guest.id)
         self.assertEqual(mocked_guest.name, guest.name)
         self.assertEqual(mocked_guest.host, guest.host)

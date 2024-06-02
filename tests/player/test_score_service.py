@@ -125,7 +125,6 @@ class TestCreateReport(unittest.TestCase):
         scores = [mock_score(80.0, 300.0, 5) for _ in range(6)]
         average_points = 80.0
         average_time = 300.0
-
         guest = mock_guest(host=id, scores=scores)
         mock.find_by_id.return_value = guest
         # When the report is created
@@ -136,19 +135,19 @@ class TestCreateReport(unittest.TestCase):
         self.assertEqual(report.avg_time, average_time)
     
     def test_create_report_when_guest_not_found(self):
-        # Given a guest and an app context
+        # Given a not existing guest and an app context
         mock = Mock()
         id = Id()
         mock = mock_app_context(mock, id, AccountType.USER)
         mock.find_by_id.return_value = None
         # When the report is created
         service = ScoreService(mock, mock, mock, mock)
-        # Then an exception is raised
+        # Then a NotFound exception is raised
         with self.assertRaisesRegex(exceptions.NotFound, "Guest not found"):
             service.create_report(Id())
     
     def test_create_report_with_different_host(self):
-        # Given a guest and an app context
+        # Given a guest, an app context and a different host
         mock = Mock()
         id = Id()
         mock = mock_app_context(mock, id, AccountType.USER)
@@ -156,6 +155,8 @@ class TestCreateReport(unittest.TestCase):
         mock.find_by_id.return_value = guest
         # When the report is created
         service = ScoreService(mock, mock, mock, mock)
-        # Then an exception is raised
+        # Then an Unauthorized exception is raised
         with self.assertRaises(exceptions.Unauthorized):
             service.create_report(guest.id)
+
+

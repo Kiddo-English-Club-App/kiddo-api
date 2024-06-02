@@ -1,0 +1,651 @@
+{
+    "accounts": [
+        {
+            "_id": "fc297509-3687-4153-8342-3e1be64d2141",
+            "first_name": "Alice",
+            "last_name": "Johnson",
+            "password": "Alic3@2023",
+            "account_type": "user",
+            "email": "alice.johnson@example.com"
+        },
+        {
+            "_id": "fd678596-f81e-4d37-a9e3-a2fdb032426a",
+            "first_name": "Bob",
+            "last_name": "Smith",
+            "password": "Bob$mith1",
+            "email": "bob.smith@example.com",
+            "account_type": "admin"
+        },
+        {
+            "_id": "230c568c-4d33-4534-a998-774e51dc5736",
+            "first_name": "Carol",
+            "last_name": "Williams",
+            "password": "Carol@123",
+            "account_type": "user",
+            "email": "carol.williams@example.com"
+        },
+        {
+            "_id": "85d5ad04-f5a8-4f12-9aad-5f77bc07d855",
+            "first_name": "David",
+            "last_name": "Brown",
+            "password": "D@vid2021",
+            "account_type": "user",
+            "email": "david.brown@example.com"
+        },
+        {
+            "_id": "c9b86c3a-79f9-40eb-9606-009bb5ed086f",
+            "first_name": "Eve",
+            "last_name": "Davis",
+            "password": "Ev3#Davis",
+            "account_type": "user",
+            "email": "eve.davis@example.com"
+        }
+    ],
+    "themes": [
+        {
+            "_id": "e3767d30-2ea0-42ae-ac0b-8ac4fdf3754f",
+            "name": "Animals",
+            "description": "A collection of various animals.",
+            "image": "animals.png",
+            "items": [
+                {
+                    "id": "4ece9e81-dd97-4580-bdf6-d3dd4dee2bdf",
+                    "name": "Lion",
+                    "image": "lion.png",
+                    "sound": "lion.mp3"
+                },
+                {
+                    "id": "2995bfcd-5399-4285-aa78-6dd14330da58",
+                    "name": "Elephant",
+                    "image": "elephant.png",
+                    "sound": "elephant.mp3"
+                },
+                {
+                    "id": "0caf1bec-7f95-46ac-9263-d14514f05f69",
+                    "name": "Monkey",
+                    "image": "monkey.png",
+                    "sound": "monkey.mp3"
+                }
+            ],
+            "background": "animals.jpg"
+        },
+        {
+            "_id": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "name": "Numbers",
+            "description": "Learn about different numbers.",
+            "image": "numbers.png",
+            "items": [
+                {
+                    "id": "67401340-3829-4de2-9aa2-72c2cf7e30c8",
+                    "name": "One",
+                    "image": "one.png",
+                    "sound": "one.mp3"
+                },
+                {
+                    "id": "eb30f24f-432b-4413-aad7-543e067d2083",
+                    "name": "Two",
+                    "image": "two.png",
+                    "sound": "two.mp3"
+                },
+                {
+                    "id": "dfa2fbcb-1748-4b8c-94c8-a2b7f047d5d2",
+                    "name": "Three",
+                    "image": "three.png",
+                    "sound": "three.mp3"
+                }
+            ],
+            "background": "numbers.jpg"
+        },
+        {
+            "_id": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+            "name": "School supplies",
+            "description": "Common items found in school.",
+            "image": "school_supplies.png",
+            "items": [
+                {
+                    "id": "9e60405b-0801-4696-b9cd-2ec60f2583eb",
+                    "name": "Pencil",
+                    "image": "pencil.png",
+                    "sound": "pencil.mp3"
+                },
+                {
+                    "id": "74295549-aeb7-469d-ace1-50b9ecf783f0",
+                    "name": "Notebook",
+                    "image": "notebook.png",
+                    "sound": "notebook.mp3"
+                },
+                {
+                    "id": "02c6a1ec-3110-4052-b186-b0116276dd09",
+                    "name": "Eraser",
+                    "image": "eraser.png",
+                    "sound": "eraser.mp3"
+                }
+            ],
+            "background": "school_supplies.jpg"
+        },
+        {
+            "_id": "16becc8b-e21d-4381-ab88-caadc32fa385",
+            "name": "Classroom activities",
+            "description": "Activities done in the classroom.",
+            "image": "classroom_activities.png",
+            "items": [
+                {
+                    "id": "ff96e776-6cff-4ef8-a895-8b0d75585d1e",
+                    "name": "Reading",
+                    "image": "reading.png",
+                    "sound": "reading.mp3"
+                },
+                {
+                    "id": "22c7f503-9b9d-44f2-94e0-8f1195162895",
+                    "name": "Writing",
+                    "image": "writing.png",
+                    "sound": "writing.mp3"
+                },
+                {
+                    "id": "44cee74c-1f42-4688-9d05-dcf855b6770d",
+                    "name": "Drawing",
+                    "image": "drawing.png",
+                    "sound": "drawing.mp3"
+                }
+            ],
+            "background": "classroom_activities.jpg"
+        },
+        {
+            "_id": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+            "name": "Colors",
+            "description": "Different colors to learn.",
+            "image": "colors.png",
+            "items": [
+                {
+                    "id": "e2aa5ce1-4d69-40e6-8b45-08fecea392e6",
+                    "name": "Red",
+                    "image": "red.png",
+                    "sound": "red.mp3"
+                },
+                {
+                    "id": "8f3835b7-6d0a-4333-904a-a375d86a3d85",
+                    "name": "Blue",
+                    "image": "blue.png",
+                    "sound": "blue.mp3"
+                },
+                {
+                    "id": "da460e6c-f424-4572-af41-41183444fe6a",
+                    "name": "Green",
+                    "image": "green.png",
+                    "sound": "green.mp3"
+                }
+            ],
+            "background": "colors.jpg"
+        }
+    ],
+    "guests": [
+        {
+            "_id": "c020ec2c-6acb-4bcc-a10e-592a88e5e037",
+            "name": "John",
+            "host": "fd678596-f81e-4d37-a9e3-a2fdb032426a",
+            "image": "male_3.png",
+            "scores": [
+                {
+                    "points": {
+                        "min": 6.300890759758215,
+                        "max": 54.13616432724893,
+                        "current": 37.95033860030145
+                    },
+                    "time": {
+                        "min": 299.5050832848285,
+                        "max": 334.490036546033,
+                        "current": 321.80936936164886
+                    },
+                    "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+                    "elements": 9
+                }
+            ],
+            "achievements": [
+                "d3e47cfc-3912-437d-b93f-96beeae98aa0",
+                "e46a5804-2113-4b38-b750-f8360ff1bf13",
+                "b85b8ad8-e710-4615-a6ee-4b19f9dcc9b4",
+                "6bcb1f19-44af-402f-ad9f-96e064ac1e34",
+                "e435f52f-66b9-46ce-b4ca-4a827e6c4b99",
+                "2edb77d5-b9d1-44ed-a3db-75fc9fddd3f3",
+                "ceb84d2e-3852-43b6-b38d-8aa67e7b52be",
+                "5ee56d7a-d591-4eec-bab5-14ddfafa49fa",
+                "a980e5c6-46cc-41c7-9a3d-366ed8acf851",
+                "cbec60c3-c89b-4efc-853a-378ab86bf86b",
+                "ca58ebcb-8b4d-45f5-aaba-aa8fdc53a098",
+                "d99b1767-e1d7-4706-b7e6-a11bf03505c9",
+                "1661af43-db70-4885-929b-2e0da6028894",
+                "02191364-cd16-4021-84ac-a4542c79eeeb",
+                "15955fb5-e2d3-4124-b080-d8987c46ef0d",
+                "30f864c6-7fdb-425d-95d8-e4a3d7564909",
+                "8f204167-b05b-4524-b7fd-253762401084",
+                "e1f32106-ed26-4100-9083-1b4d6b933739",
+                "c0b9040b-3692-45ac-9859-05ba458239b1"
+            ]
+        },
+        {
+            "_id": "63e51d6b-fa55-4268-bc81-367d5d4811de",
+            "name": "Emily",
+            "host": "c9b86c3a-79f9-40eb-9606-009bb5ed086f",
+            "image": "female_1.png",
+            "scores": [
+                {
+                    "points": {
+                        "min": 1.6272152190795919,
+                        "max": 22.917712447574257,
+                        "current": 12.158528032885595
+                    },
+                    "time": {
+                        "min": 69.59739940640179,
+                        "max": 317.28282111730124,
+                        "current": 152.9849133911556
+                    },
+                    "theme": "e3767d30-2ea0-42ae-ac0b-8ac4fdf3754f",
+                    "elements": 9
+                },
+                {
+                    "points": {
+                        "min": 43.07394569091765,
+                        "max": 95.58468186796023,
+                        "current": 69.7847692884567
+                    },
+                    "time": {
+                        "min": 135.2566069903902,
+                        "max": 348.91241804077004,
+                        "current": 268.3802081080382
+                    },
+                    "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+                    "elements": 6
+                }
+            ],
+            "achievements": [
+                "48d09065-445b-488b-8030-3fe08cedb24c",
+                "15955fb5-e2d3-4124-b080-d8987c46ef0d",
+                "5ee56d7a-d591-4eec-bab5-14ddfafa49fa",
+                "cce1ce50-e9b8-44d1-811e-4a93ac30362a",
+                "33a4849b-18e9-4ef2-835c-6503294fa8e2",
+                "30f864c6-7fdb-425d-95d8-e4a3d7564909",
+                "e46a5804-2113-4b38-b750-f8360ff1bf13",
+                "2edb77d5-b9d1-44ed-a3db-75fc9fddd3f3",
+                "d99b1767-e1d7-4706-b7e6-a11bf03505c9",
+                "f2a92d0a-6a4f-44be-a500-5eaa863cc892",
+                "8f204167-b05b-4524-b7fd-253762401084",
+                "1661af43-db70-4885-929b-2e0da6028894",
+                "e1f32106-ed26-4100-9083-1b4d6b933739"
+            ]
+        },
+        {
+            "_id": "3bf145ae-06f4-4b0a-b227-de776fcc0213",
+            "name": "Michael",
+            "host": "230c568c-4d33-4534-a998-774e51dc5736",
+            "image": "male_1.png",
+            "scores": [
+                {
+                    "points": {
+                        "min": 16.133234918604078,
+                        "max": 47.02575969652987,
+                        "current": 24.469884476445614
+                    },
+                    "time": {
+                        "min": 22.145386706454303,
+                        "max": 283.3693161067284,
+                        "current": 172.06630378468765
+                    },
+                    "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+                    "elements": 16
+                }
+            ],
+            "achievements": [
+                "a980e5c6-46cc-41c7-9a3d-366ed8acf851",
+                "f2a92d0a-6a4f-44be-a500-5eaa863cc892",
+                "6bcb1f19-44af-402f-ad9f-96e064ac1e34",
+                "d3e47cfc-3912-437d-b93f-96beeae98aa0",
+                "15955fb5-e2d3-4124-b080-d8987c46ef0d",
+                "48d09065-445b-488b-8030-3fe08cedb24c",
+                "f1e76c95-e5e2-475b-95c5-e499901eabbc",
+                "e435f52f-66b9-46ce-b4ca-4a827e6c4b99",
+                "cce1ce50-e9b8-44d1-811e-4a93ac30362a"
+            ]
+        },
+        {
+            "_id": "b2c72615-eb17-40bc-a076-78f4e7f501ee",
+            "name": "Sarah",
+            "host": "fc297509-3687-4153-8342-3e1be64d2141",
+            "image": "female_3.png",
+            "scores": [
+                {
+                    "points": {
+                        "min": 21.789864912876176,
+                        "max": 59.651321104660774,
+                        "current": 48.650605369450915
+                    },
+                    "time": {
+                        "min": 130.2101619225006,
+                        "max": 279.16944890501327,
+                        "current": 202.21960867986152
+                    },
+                    "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+                    "elements": 19
+                },
+                {
+                    "points": {
+                        "min": 21.268738712904245,
+                        "max": 47.36253795307923,
+                        "current": 46.93712046517816
+                    },
+                    "time": {
+                        "min": 107.05157294024744,
+                        "max": 236.2418184265303,
+                        "current": 202.62535631536173
+                    },
+                    "theme": "16becc8b-e21d-4381-ab88-caadc32fa385",
+                    "elements": 12
+                },
+                {
+                    "points": {
+                        "min": 46.098157145505795,
+                        "max": 86.3364203925584,
+                        "current": 64.41698230389208
+                    },
+                    "time": {
+                        "min": 155.07539255800557,
+                        "max": 244.14593564065328,
+                        "current": 212.69149917892386
+                    },
+                    "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+                    "elements": 4
+                },
+                {
+                    "points": {
+                        "min": 9.625057767955248,
+                        "max": 93.22260625465634,
+                        "current": 43.60094507495117
+                    },
+                    "time": {
+                        "min": 12.920114383070725,
+                        "max": 258.4865364922656,
+                        "current": 125.32706700398596
+                    },
+                    "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+                    "elements": 11
+                }
+            ],
+            "achievements": [
+                "d99b1767-e1d7-4706-b7e6-a11bf03505c9",
+                "a196a3c1-b630-4024-9e78-60df7944100d",
+                "e1f32106-ed26-4100-9083-1b4d6b933739",
+                "30f864c6-7fdb-425d-95d8-e4a3d7564909",
+                "2edb77d5-b9d1-44ed-a3db-75fc9fddd3f3",
+                "33a4849b-18e9-4ef2-835c-6503294fa8e2",
+                "6bcb1f19-44af-402f-ad9f-96e064ac1e34",
+                "1661af43-db70-4885-929b-2e0da6028894",
+                "02191364-cd16-4021-84ac-a4542c79eeeb",
+                "5ee56d7a-d591-4eec-bab5-14ddfafa49fa",
+                "1ce59341-1896-4d54-bfcc-53ae2f4515b3"
+            ]
+        },
+        {
+            "_id": "b7256a64-20c1-46ff-88bf-c9df9616072d",
+            "name": "David",
+            "host": "230c568c-4d33-4534-a998-774e51dc5736",
+            "image": "male_2.png",
+            "scores": [
+                {
+                    "points": {
+                        "min": 70.15027426923452,
+                        "max": 83.60298733542353,
+                        "current": 71.70091707899088
+                    },
+                    "time": {
+                        "min": 209.2633582233753,
+                        "max": 284.8851879809572,
+                        "current": 236.98563104523038
+                    },
+                    "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+                    "elements": 8
+                },
+                {
+                    "points": {
+                        "min": 95.03521453047577,
+                        "max": 99.85581312449462,
+                        "current": 95.27734143482813
+                    },
+                    "time": {
+                        "min": 97.94050599624828,
+                        "max": 232.08305740411816,
+                        "current": 229.2367053733535
+                    },
+                    "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+                    "elements": 6
+                }
+            ],
+            "achievements": [
+                "d99b1767-e1d7-4706-b7e6-a11bf03505c9",
+                "02191364-cd16-4021-84ac-a4542c79eeeb",
+                "e435f52f-66b9-46ce-b4ca-4a827e6c4b99",
+                "a980e5c6-46cc-41c7-9a3d-366ed8acf851",
+                "5ee56d7a-d591-4eec-bab5-14ddfafa49fa",
+                "33a4849b-18e9-4ef2-835c-6503294fa8e2",
+                "30f864c6-7fdb-425d-95d8-e4a3d7564909",
+                "6bcb1f19-44af-402f-ad9f-96e064ac1e34",
+                "1661af43-db70-4885-929b-2e0da6028894",
+                "cc5db6a5-0380-4820-a64e-e4e3d4dc1d4d",
+                "48d09065-445b-488b-8030-3fe08cedb24c",
+                "a196a3c1-b630-4024-9e78-60df7944100d",
+                "ca58ebcb-8b4d-45f5-aaba-aa8fdc53a098",
+                "cbec60c3-c89b-4efc-853a-378ab86bf86b"
+            ]
+        }
+    ],
+    "achievements": [
+        {
+            "_id": "ca58ebcb-8b4d-45f5-aaba-aa8fdc53a098",
+            "key": "points",
+            "value": 55,
+            "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+            "description": "Complete School supplies with at least 52 points"
+        },
+        {
+            "_id": "e46a5804-2113-4b38-b750-f8360ff1bf13",
+            "key": "points",
+            "value": 56,
+            "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "description": "Complete Numbers with at least 7 points"
+        },
+        {
+            "_id": "d3e47cfc-3912-437d-b93f-96beeae98aa0",
+            "key": "min_time",
+            "value": 93,
+            "theme": "e3767d30-2ea0-42ae-ac0b-8ac4fdf3754f",
+            "description": "Complete Animals in less than 63 seconds"
+        },
+        {
+            "_id": "6bcb1f19-44af-402f-ad9f-96e064ac1e34",
+            "key": "points",
+            "value": 75,
+            "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+            "description": "Complete School supplies with at least 7 points"
+        },
+        {
+            "_id": "0d745305-63eb-4806-8dab-20f7b654b9cc",
+            "key": "n_games",
+            "value": 51,
+            "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+            "description": "Complete Colors 89 times"
+        },
+        {
+            "_id": "c0b9040b-3692-45ac-9859-05ba458239b1",
+            "key": "n_games",
+            "value": 24,
+            "theme": "e3767d30-2ea0-42ae-ac0b-8ac4fdf3754f",
+            "description": "Complete Animals 6 times"
+        },
+        {
+            "_id": "c7cd8b6c-3577-426b-b81a-01c3d750512e",
+            "key": "n_games",
+            "value": 93,
+            "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+            "description": "Complete School supplies 27 times"
+        },
+        {
+            "_id": "30f864c6-7fdb-425d-95d8-e4a3d7564909",
+            "key": "points",
+            "value": 4,
+            "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "description": "Complete Numbers with at least 71 points"
+        },
+        {
+            "_id": "b85b8ad8-e710-4615-a6ee-4b19f9dcc9b4",
+            "key": "min_time",
+            "value": 85,
+            "theme": "16becc8b-e21d-4381-ab88-caadc32fa385",
+            "description": "Complete Classroom activities in less than 80 seconds"
+        },
+        {
+            "_id": "1ce59341-1896-4d54-bfcc-53ae2f4515b3",
+            "key": "n_games",
+            "value": 98,
+            "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "description": "Complete Numbers 86 times"
+        },
+        {
+            "_id": "2edb77d5-b9d1-44ed-a3db-75fc9fddd3f3",
+            "key": "min_time",
+            "value": 78,
+            "theme": "16becc8b-e21d-4381-ab88-caadc32fa385",
+            "description": "Complete Classroom activities in less than 89 seconds"
+        },
+        {
+            "_id": "a196a3c1-b630-4024-9e78-60df7944100d",
+            "key": "min_time",
+            "value": 10,
+            "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+            "description": "Complete School supplies in less than 82 seconds"
+        },
+        {
+            "_id": "ceb84d2e-3852-43b6-b38d-8aa67e7b52be",
+            "key": "points",
+            "value": 69,
+            "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+            "description": "Complete School supplies with at least 97 points"
+        },
+        {
+            "_id": "5ee56d7a-d591-4eec-bab5-14ddfafa49fa",
+            "key": "points",
+            "value": 99,
+            "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+            "description": "Complete Colors with at least 1 points"
+        },
+        {
+            "_id": "cc5db6a5-0380-4820-a64e-e4e3d4dc1d4d",
+            "key": "n_games",
+            "value": 70,
+            "theme": "e3767d30-2ea0-42ae-ac0b-8ac4fdf3754f",
+            "description": "Complete Animals 71 times"
+        },
+        {
+            "_id": "d99b1767-e1d7-4706-b7e6-a11bf03505c9",
+            "key": "min_time",
+            "value": 76,
+            "theme": "e3767d30-2ea0-42ae-ac0b-8ac4fdf3754f",
+            "description": "Complete Animals in less than 39 seconds"
+        },
+        {
+            "_id": "f2a92d0a-6a4f-44be-a500-5eaa863cc892",
+            "key": "points",
+            "value": 43,
+            "theme": "e3767d30-2ea0-42ae-ac0b-8ac4fdf3754f",
+            "description": "Complete Animals with at least 78 points"
+        },
+        {
+            "_id": "1661af43-db70-4885-929b-2e0da6028894",
+            "key": "points",
+            "value": 30,
+            "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+            "description": "Complete Colors with at least 48 points"
+        },
+        {
+            "_id": "5006cff8-85ce-476b-9e9b-57f80032e685",
+            "key": "min_time",
+            "value": 33,
+            "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "description": "Complete Numbers in less than 67 seconds"
+        },
+        {
+            "_id": "e1f32106-ed26-4100-9083-1b4d6b933739",
+            "key": "n_games",
+            "value": 97,
+            "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "description": "Complete Numbers 36 times"
+        },
+        {
+            "_id": "e435f52f-66b9-46ce-b4ca-4a827e6c4b99",
+            "key": "min_time",
+            "value": 99,
+            "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "description": "Complete Numbers in less than 34 seconds"
+        },
+        {
+            "_id": "8f204167-b05b-4524-b7fd-253762401084",
+            "key": "points",
+            "value": 62,
+            "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+            "description": "Complete Colors with at least 48 points"
+        },
+        {
+            "_id": "48d09065-445b-488b-8030-3fe08cedb24c",
+            "key": "min_time",
+            "value": 91,
+            "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+            "description": "Complete Colors in less than 5 seconds"
+        },
+        {
+            "_id": "cbec60c3-c89b-4efc-853a-378ab86bf86b",
+            "key": "points",
+            "value": 6,
+            "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "description": "Complete Numbers with at least 35 points"
+        },
+        {
+            "_id": "a980e5c6-46cc-41c7-9a3d-366ed8acf851",
+            "key": "n_games",
+            "value": 76,
+            "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+            "description": "Complete Colors 62 times"
+        },
+        {
+            "_id": "15955fb5-e2d3-4124-b080-d8987c46ef0d",
+            "key": "n_games",
+            "value": 43,
+            "theme": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+            "description": "Complete Colors 15 times"
+        },
+        {
+            "_id": "cce1ce50-e9b8-44d1-811e-4a93ac30362a",
+            "key": "points",
+            "value": 67,
+            "theme": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+            "description": "Complete Numbers with at least 48 points"
+        },
+        {
+            "_id": "33a4849b-18e9-4ef2-835c-6503294fa8e2",
+            "key": "min_time",
+            "value": 90,
+            "theme": "16becc8b-e21d-4381-ab88-caadc32fa385",
+            "description": "Complete Classroom activities in less than 77 seconds"
+        },
+        {
+            "_id": "02191364-cd16-4021-84ac-a4542c79eeeb",
+            "key": "points",
+            "value": 13,
+            "theme": "16becc8b-e21d-4381-ab88-caadc32fa385",
+            "description": "Complete Classroom activities with at least 67 points"
+        },
+        {
+            "_id": "f1e76c95-e5e2-475b-95c5-e499901eabbc",
+            "key": "min_time",
+            "value": 18,
+            "theme": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+            "description": "Complete School supplies in less than 77 seconds"
+        }
+    ]
+}

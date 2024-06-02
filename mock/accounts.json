@@ -1,0 +1,27 @@
+[
+    {
+        "id": "fc297509-3687-4153-8342-3e1be64d2141",
+        "email": "alice.johnson@example.com",
+        "password": "Alic3@2023"
+    },
+    {
+        "id": "fd678596-f81e-4d37-a9e3-a2fdb032426a",
+        "email": "bob.smith@example.com",
+        "password": "Bob$mith1"
+    },
+    {
+        "id": "230c568c-4d33-4534-a998-774e51dc5736",
+        "email": "carol.williams@example.com",
+        "password": "Carol@123"
+    },
+    {
+        "id": "85d5ad04-f5a8-4f12-9aad-5f77bc07d855",
+        "email": "david.brown@example.com",
+        "password": "D@vid2021"
+    },
+    {
+        "id": "c9b86c3a-79f9-40eb-9606-009bb5ed086f",
+        "email": "eve.davis@example.com",
+        "password": "Ev3#Davis"
+    }
+]

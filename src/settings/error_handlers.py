@@ -4,6 +4,7 @@ from werkzeug.exceptions import HTTPException
 from pydantic import ValidationError
 from shared import exceptions as exc
 from settings.environment import env, EnvType
+from settings.logs import logger
 
 def handle_domain_exception(error: exc.DomainException):
     match error.title:
@@ -18,6 +19,8 @@ def handle_domain_exception(error: exc.DomainException):
         case _:
             status_code = 400
 
+    logger().error(f"Domain exception: {error.title} - {error.message}")
+    
     return {
         "error": error.title,
         "message": error.message

@@ -1,5 +1,8 @@
 .venv
 .env
+.vscode
+.idea
 concept_test.py
 __pycache__
 cache
+.pytest_cache

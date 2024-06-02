@@ -13,7 +13,8 @@ mime_types = {
     'svg': 'image/svg+xml',
     'heif': 'image/heif',
     'heic': 'image/heic',
-    'raw': 'image/x-raw'
+    'raw': 'image/x-raw',
+    'mp3': 'audio/mpeg',
 }
 
 

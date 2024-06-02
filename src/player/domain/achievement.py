@@ -88,6 +88,9 @@ class NGamesOfThemeAchievement(Achievement):
 
     def check(self, score: Score) -> bool:
         return score.elements >= self.value and score.theme.id == self.theme.id
+    
+    def __str__(self) -> str:
+        return f"Complete {self.theme.value.name} {self.value} times"
 
 
 class AchievementFactory:

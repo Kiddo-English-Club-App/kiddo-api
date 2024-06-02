@@ -1,5 +1,5 @@
 from uuid import UUID
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, computed_field
 
 from account.application import dto
 
@@ -24,7 +24,7 @@ class AccountDto(BaseModel):
     email: EmailStr
     account_type: str
 
-    @property
+    @computed_field
     def full_name(self) -> str:
         return f"{self.first_name} {self.last_name}"
     
