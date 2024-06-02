@@ -23,6 +23,15 @@ class Environment:
     S3_BUCKET_NAME: str
     MOCK_DIR: str = "mock"
 
+    def is_testing(self):
+        return self.ENV == EnvType.TESTING
+
+    def is_development(self):
+        return self.ENV == EnvType.DEVELOPMENT
+    
+    def is_production(self):
+        return self.ENV == EnvType.PRODUCTION
+
 env = Environment()
 
 def init(app):

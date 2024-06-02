@@ -33,9 +33,10 @@ def create_app() -> Flask:
 
     @app.route('/health')
     def health():
-        return {"status": "OK"}, 200
+        return {"status": "OK", "environment": environment.env.ENV}, 200
     
-    if environment.env.ENV == environment.EnvType.TESTING:
+    if environment.env.is_testing():
+        logs.logger().info(f"Testing environment detected. Adding test endpoints.")
         @app.post('/test')
         def init_test():
             dependencies.delete_db()
