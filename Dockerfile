@@ -6,6 +6,7 @@ COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
 COPY src/ /app
+COPY mock/ /app/mock
 
 EXPOSE 5000
 
