@@ -1,4 +1,3 @@
-from uuid import UUID
 from flask import request
 
 from shared.id import Id

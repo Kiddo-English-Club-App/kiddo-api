@@ -3,8 +3,8 @@
 from werkzeug.exceptions import HTTPException
 from pydantic import ValidationError
 from shared import exceptions as exc
-from settings.environment import env, EnvType
-from settings.logs import logger
+from settings.environment import env
+
 
 def handle_domain_exception(error: exc.DomainException):
     match error.title:
@@ -18,8 +18,6 @@ def handle_domain_exception(error: exc.DomainException):
             status_code = 403
         case _:
             status_code = 400
-
-    logger().error(f"Domain exception: {error.title} - {error.message}")
     
     return {
         "error": error.title,
@@ -57,5 +55,5 @@ def init(app):
     app.register_error_handler(ValidationError, handle_validation_error)
     app.register_error_handler(HTTPException, handle_http_exception)
 
-    if env.ENV == EnvType.PRODUCTION:
+    if not env.is_development():
         app.register_error_handler(Exception, handle_exception)

@@ -1,0 +1,37 @@
+[
+    {
+        "theme_id": "e3767d30-2ea0-42ae-ac0b-8ac4fdf3754f",
+        "jwt_sub": "c9b86c3a-79f9-40eb-9606-009bb5ed086f",
+        "jwt_email": "eve.davis@example.com",
+        "jwt_account_type": "user",
+        "jwt_exp": 1717660952.697481
+    },
+    {
+        "theme_id": "2e2fe625-3329-41fd-a640-24a1bcda90c9",
+        "jwt_sub": "85d5ad04-f5a8-4f12-9aad-5f77bc07d855",
+        "jwt_email": "david.brown@example.com",
+        "jwt_account_type": "user",
+        "jwt_exp": 1717660952.697481
+    },
+    {
+        "theme_id": "018bea13-eb33-4530-ae0b-1aa24acf0e7c",
+        "jwt_sub": "230c568c-4d33-4534-a998-774e51dc5736",
+        "jwt_email": "carol.williams@example.com",
+        "jwt_account_type": "user",
+        "jwt_exp": 1717660952.697481
+    },
+    {
+        "theme_id": "16becc8b-e21d-4381-ab88-caadc32fa385",
+        "jwt_sub": "c9b86c3a-79f9-40eb-9606-009bb5ed086f",
+        "jwt_email": "eve.davis@example.com",
+        "jwt_account_type": "user",
+        "jwt_exp": 1717660952.697481
+    },
+    {
+        "theme_id": "38dc06d8-6d2d-4450-92e5-a1a7e8c7156b",
+        "jwt_sub": "fd678596-f81e-4d37-a9e3-a2fdb032426a",
+        "jwt_email": "bob.smith@example.com",
+        "jwt_account_type": "admin",
+        "jwt_exp": 1717660952.697481
+    }
+]

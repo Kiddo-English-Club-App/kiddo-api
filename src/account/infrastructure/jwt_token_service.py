@@ -2,6 +2,7 @@ import jwt
 from datetime import datetime, timedelta
 
 from settings.environment import env
+from settings.logs import logger
 from account.application.dto import AccountDto
 from shared.exceptions import InvalidToken
 
@@ -17,7 +18,7 @@ class JwtTokenService(TokenService):
             "account_type": account.account_type,
             "exp": (datetime.now() + timedelta(minutes=env.ACCESS_TOKEN_EXPIRATION)).timestamp()
         }
-        print(env.ACCESS_TOKEN_SECRET)
+        
         return jwt.encode(payload, env.ACCESS_TOKEN_SECRET, algorithm="HS256")
     
     def create_refresh_token(self, account: AccountDto) -> str:
@@ -31,6 +32,9 @@ class JwtTokenService(TokenService):
 
     def verify_token(self, token: str) -> bool:
         try:
+            if env.is_development():
+                logger().debug(f"Token: {token}")
+
             jwt.decode(token, env.ACCESS_TOKEN_SECRET, algorithms=["HS256"])
             return True
         except jwt.ExpiredSignatureError:
