@@ -1,15 +1,16 @@
 # Domain model
 from shared.id import Id
-from .password import Password
+from .password import PasswordStr
+from shared.name import NameStr
 from shared.account_type import AccountType
 
 
 class Account:
     id: Id
-    first_name: str
-    last_name: str
+    first_name: NameStr
+    last_name: NameStr
     email: str
-    password: Password
+    password: PasswordStr
     account_type: AccountType
 
     def __init__(
@@ -17,21 +18,17 @@ class Account:
             first_name: str,
             last_name: str,
             email: str,
-            password: Password | str,
+            password: PasswordStr | str,
             id: Id = None,
             account_type: AccountType = AccountType.USER
             ):
 
         self.id = id if isinstance(id, Id) else Id(id)
-        self.first_name = first_name.strip()
-        self.last_name = last_name.strip()
+        self.first_name = NameStr(first_name)
+        self.last_name = NameStr(last_name)
         self.email = email.strip()
         self.account_type = account_type
-        
-        if isinstance(password, str):
-            password = Password(password)
-        
-        self.password = password
+        self.password = PasswordStr(password)
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Account):

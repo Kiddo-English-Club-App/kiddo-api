@@ -1,12 +1,13 @@
 # Domain model
 from shared.id import Id
+from shared.name import NameStr
 from .score import Score
 from .achievement import Achievement
 
 
 class Guest:
     id: Id
-    name: str
+    name: NameStr
     host: Id
     image: str
     scores: list[Score]
@@ -22,7 +23,7 @@ class Guest:
             id: Id = None) -> None:
         
         self.id = id if isinstance(id, Id) else Id()
-        self.name = name
+        self.name = NameStr(name)
         self.image = image
         self.scores = scores
         self.host = host

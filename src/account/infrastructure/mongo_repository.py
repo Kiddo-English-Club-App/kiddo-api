@@ -5,7 +5,7 @@ from uuid import UUID
 from shared.id import Id
 from shared.reference import Ref
 from shared.account_type import AccountType
-from ..domain.password import Password
+from ..domain.password import PasswordStr
 from ..domain.account import Account
 from ..domain.account_repository import IAccountRepository, AccountRef
 
@@ -29,7 +29,7 @@ class DBAccount(Document):
             first_name=entity.first_name,
             last_name=entity.last_name,
             email=entity.email,
-            password=entity.password.hashed,
+            password=entity.password,
             account_type=entity.account_type
         )
 
@@ -39,7 +39,7 @@ class DBAccount(Document):
             first_name=self.first_name,
             last_name=self.last_name,
             email=self.email,
-            password=Password(self.password, hashed=True),
+            password=PasswordStr(self.password, hashed=True),
             account_type=self.account_type
         )
 

@@ -6,12 +6,16 @@ from shared import exceptions
 from ..mocks import mock_app_context
 
 
-def mock_account():
+def mock_account(
+        name="John",
+        last="Doe",
+        password="12345679Ab!", 
+        email="john.doe@test.com"):
     return Account(
-        first_name="John",
-        last_name="Doe",
-        email="john.doe@test.com",
-        password="12345679Ab!")
+        first_name=name,
+        last_name=last,
+        email=email,
+        password=password)
 
 
 def mock_account_repository(mock, account = None):
@@ -129,14 +133,14 @@ class TestGetAccount(unittest.TestCase):
 class TestLogin(unittest.TestCase):
 
     def test_login(self):
-        base_account = mock_account()
+        base_account = mock_account(email="john.doe@test.com", password="12345679Ab!")
         mock = Mock()
         mock = mock_account_repository(mock, base_account)
         mock = mock_app_context(mock, None, None)
 
         class LoginDto:
-            email: str = base_account.email
-            password: str = base_account.password
+            email: str = "john.doe@test.com"
+            password: str = "12345679Ab!"
 
         account_service = AccountService(mock, mock)
 

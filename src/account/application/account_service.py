@@ -41,8 +41,7 @@ class AccountService:
 
     def authenticate(self, data: dto.AuthenticateDto) -> dto.AccountDto:
         account = self.account_repository.find_by_email(data.email)
-        
         if account and account.password == data.password:
             return dto.AccountDto.from_entity(account)
-
+        
         raise InvalidCredentials

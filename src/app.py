@@ -27,10 +27,12 @@ def create_app() -> Flask:
     import settings.environment as environment
 
     settings.init(app)
+    
     load_controllers(app)
 
     logs.logger().info(f"Env: {environment.env.ENV}")
 
+    
     @app.route('/health')
     def health():
         return {"status": "OK", "environment": environment.env.ENV}, 200
