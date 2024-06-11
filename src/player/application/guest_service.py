@@ -3,7 +3,7 @@ from shared.app_context import AppContext
 from shared.id import Id
 from shared.permissions import (
     AdminOrSameUserPermission, SameUserPermission, validate)
-from shared.exceptions import  NotFound, ValidationError
+from shared.exceptions import  DomainException, NotFound, ValidationError
 from shared.account_type import AccountType
 
 from ..domain.guest import Guest
@@ -67,3 +67,14 @@ class GuestService:
         validate(self.app_context, AdminOrSameUserPermission(AccountType.ADMIN, guest.host))
         
         return [dto.AchievementDto.from_entity(achievement) for achievement in guest.achievements]
+    
+    def delete_guest(self, guest_id: Id) -> None:
+        guest = self.guest_repository.find_by_id(guest_id)
+
+        if not guest:
+            raise NotFound("Guest not found")
+        
+        validate(self.app_context, SameUserPermission(guest.host))
+        
+        if not self.guest_repository.delete_by_id(guest_id):
+            raise DomainException("Error deleting guest")

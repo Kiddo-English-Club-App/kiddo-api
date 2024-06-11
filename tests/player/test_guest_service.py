@@ -152,3 +152,52 @@ class TestGetGuests(unittest.TestCase):
         service = GuestService(mock, mock, mock)
         with self.assertRaises(exceptions.Unauthorized):
             service.get_guests(Id())
+
+
+class TestDeleteGuest(unittest.TestCase):
+
+    def test_delete_guest(self):
+        mock = Mock()
+        guest = mock_guest()
+        mock.find_by_id.return_value = guest
+
+        mock = mock_app_context(mock, guest.host, ac_type=AccountType.USER)
+        mock.delete_by_id.return_value = True
+
+        service = GuestService(mock, mock, mock)
+        service.delete_guest(guest.id)
+        mock.delete_by_id.assert_called_with(guest.id)
+    
+    def test_delete_guest_unauthorized(self):
+        mock = Mock()
+        guest = mock_guest()
+        mock.find_by_id.return_value = guest
+
+        mock = mock_app_context(mock, Id(), ac_type=AccountType.USER, authorized=False)
+        
+        service = GuestService(mock, mock, mock)
+        with self.assertRaises(exceptions.Unauthorized):
+            service.delete_guest(guest.id)
+    
+    def test_delete_guest_not_found(self):
+        mock = Mock()
+        mock.find_by_id.return_value = None
+
+        mock = mock_app_context(mock, Id(), ac_type=AccountType.USER)
+        
+        service = GuestService(mock, mock, mock)
+        with self.assertRaises(exceptions.NotFound):
+            service.delete_guest(Id())
+
+    def test_delete_guest_error(self):
+        mock = Mock()
+        guest = mock_guest()
+        mock.find_by_id.return_value = guest
+
+        mock = mock_app_context(mock, guest.host, ac_type=AccountType.USER)
+        mock.delete_by_id.return_value = False
+
+        service = GuestService(mock, mock, mock)
+        with self.assertRaisesRegex(exceptions.DomainException, "Error deleting guest"):
+            service.delete_guest(guest.id)
+    

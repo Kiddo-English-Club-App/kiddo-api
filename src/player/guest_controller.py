@@ -41,3 +41,12 @@ def get_guest_achievements(service: GuestService, guest_id: UUID):
     achievements = service.get_guest_achievements(Id(guest_id))
     return [AchievementDto.load(achievement).model_dump() 
             for achievement in achievements]
+
+
+@controller.delete('/<uuid:guest_id>')
+@inject
+def delete_guest(service: GuestService, guest_id: UUID):
+    service.delete_guest(Id(guest_id))
+    return {
+        'message': 'Guest deleted'
+    }
