@@ -3,7 +3,7 @@ from shared.app_context import AppContext
 from shared.id import Id
 from shared.permissions import (
     AdminOrSameUserPermission, SameUserPermission, validate)
-from shared.exceptions import  NotFound
+from shared.exceptions import  NotFound, ValidationError
 from shared.account_type import AccountType
 
 from ..domain.guest import Guest
@@ -13,6 +13,8 @@ from . import dto
 
 
 class GuestService:
+
+    GUESTS_LIMIT = 3
 
     def __init__(
             self, 
@@ -30,6 +32,11 @@ class GuestService:
             name=data.name,
             host=data.host,
             image=data.image)
+        
+        guests = self.guest_repository.find_all(data.host)
+
+        if len(guests) >= GuestService.GUESTS_LIMIT:
+            raise ValidationError("You can't have more than 3 guests")
         
         self.guest_repository.save(guest)
 

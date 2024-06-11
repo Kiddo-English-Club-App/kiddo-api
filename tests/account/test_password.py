@@ -18,21 +18,21 @@ class TestPasswordStr(unittest.TestCase):
         self.assertEqual(password, "Password123@")
 
     def test_password_length_validation(self):
-        with self.assertRaisesRegex(exceptions.InvalidPassword, "(.)*8 characters(.)*"):
+        with self.assertRaisesRegex(exceptions.ValidationError, "(.)*8 characters(.)*"):
             PasswordStr("passw")
 
     def test_password_with_digits(self):
-        with self.assertRaisesRegex(exceptions.InvalidPassword, "(.)*digit(.)*"):
+        with self.assertRaisesRegex(exceptions.ValidationError, "(.)*digit(.)*"):
             PasswordStr("password")
 
     def test_password_with_uppercase_text(self):
-        with self.assertRaisesRegex(exceptions.InvalidPassword, "(.)*uppercase(.)*"):
+        with self.assertRaisesRegex(exceptions.ValidationError, "(.)*uppercase(.)*"):
             PasswordStr("password1")
 
     def test_password_with_lowercase_text(self):
-        with self.assertRaisesRegex(exceptions.InvalidPassword, "(.)*lowercase(.)*"):
+        with self.assertRaisesRegex(exceptions.ValidationError, "(.)*lowercase(.)*"):
             PasswordStr("PASSWORD1")
 
     def test_password_with_special_character(self):
-        with self.assertRaisesRegex(exceptions.InvalidPassword, "(.)*special character(.)*"):
+        with self.assertRaisesRegex(exceptions.ValidationError, "(.)*special character(.)*"):
             PasswordStr("Password1")

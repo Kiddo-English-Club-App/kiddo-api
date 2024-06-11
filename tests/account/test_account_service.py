@@ -60,7 +60,7 @@ class TestCreateAccount(unittest.TestCase):
         
         account_service = AccountService(mock, mock)
 
-        with self.assertRaises(exceptions.InvalidPassword):
+        with self.assertRaisesRegex(exceptions.ValidationError, "(.)*Password(.)*"):
             account_service.create_account(CreateAccountDto())
 
     def test_create_account_with_existing_email(self):

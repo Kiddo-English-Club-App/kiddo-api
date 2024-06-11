@@ -17,7 +17,7 @@ class DummyRef[T](Ref[T]):
 def mock_guest(achievements: list[Achievement] = [], host: Id = None, scores: list[int] = []):
     host = host if host else Id()
     return Guest(
-        name="John Doe",
+        name="John",
         image="image.jpg",
         achievements=achievements,
         host=host,

@@ -1,5 +1,5 @@
 import bcrypt
-from shared.exceptions import InvalidPassword
+from shared.exceptions import ValidationError
 
 
 class Password:
@@ -11,19 +11,19 @@ class Password:
     @classmethod
     def validate(cls, password: str):
         if len(password) < 8:
-            raise InvalidPassword("Password must have at least 8 characters")
+            raise ValidationError("Password must have at least 8 characters")
 
         if not any(char.isdigit() for char in password):
-            raise InvalidPassword("Password must have at least one digit")
+            raise ValidationError("Password must have at least one digit")
 
         if not any(char.isupper() for char in password):
-            raise InvalidPassword("Password must have at least one uppercase letter")
+            raise ValidationError("Password must have at least one uppercase letter")
 
         if not any(char.islower() for char in password):
-            raise InvalidPassword("Password must have at least one lowercase letter")
+            raise ValidationError("Password must have at least one lowercase letter")
 
         if not any(char in "!@#$%^&*()-+" for char in password):
-            raise InvalidPassword("Password must have at least one special character (e.g. !@#$%^&*()-+)")
+            raise ValidationError("Password must have at least one special character (e.g. !@#$%^&*()-+)")
 
 
 class PasswordStr(str):

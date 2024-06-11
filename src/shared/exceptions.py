@@ -19,7 +19,7 @@ class MessageException(DomainException):
 
 class Unauthenticated(MessageException):
     message: str = "Not authenticated"
-    title: str = "unauthorized"
+    title: str = "unauthenticated"
 
 
 class Unauthorized(MessageException):
@@ -45,11 +45,6 @@ class InvalidCredentials(MessageException):
 class InvalidToken(MessageException):
     message: str = "Invalid token"
     title: str = "invalid_token"
-
-
-class InvalidPassword(MessageException):
-    message: str = "Invalid password"
-    title: str = "invalid_password"
 
 
 class AlreadyExists(MessageException):

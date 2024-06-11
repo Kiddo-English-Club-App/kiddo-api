@@ -18,13 +18,14 @@ class TestCreateGuest(unittest.TestCase):
 
         mock = Mock()
         mock.save.return_value = mock_guest()
+        mock.find_all.return_value = []
 
         host = Id()
         mock = mock_app_context(mock, host, ac_type=AccountType.USER)
         
         data = CreateGuest()
         data.host = host
-        data.name = "John Doe"
+        data.name = "John"
         data.image = "image"
 
         service = GuestService(mock, mock, mock)
@@ -53,6 +54,28 @@ class TestCreateGuest(unittest.TestCase):
 
         service = GuestService(mock, mock, mock)
         with self.assertRaises(exceptions.Unauthorized):
+            service.create_guest(data)
+    
+    def test_create_guest_when_there_are_already_the_limit_allowed(self):
+
+        class CreateGuest:
+            host: Id
+            name: str
+            image: str
+
+        mock = Mock()
+        mock.find_all.return_value = [mock_guest() for _ in range(GuestService.GUESTS_LIMIT)]
+
+        host = Id()
+        mock = mock_app_context(mock, host, ac_type=AccountType.USER)
+        
+        data = CreateGuest()
+        data.host = host
+        data.name = "John"
+        data.image = "image"
+
+        service = GuestService(mock, mock, mock)
+        with self.assertRaisesRegex(exceptions.ValidationError, "(.)*more than(.)*guests(.)*"):
             service.create_guest(data)
 
         
