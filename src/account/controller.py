@@ -8,7 +8,6 @@ from dependify import inject
 
 from account.application.account_service import AccountService
 from account.application.token_service import TokenService
-from account.application import dto
 from .dto import AccountDto, RegisterDto, LoginDto
 
 controller = Blueprint('account', __name__, url_prefix='/accounts')

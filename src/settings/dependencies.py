@@ -89,6 +89,10 @@ def delete_db():
         raise Exception("This method should only be called in the testing environment")
     
     client = __data["client"]
-    client.drop_database(env.MONGO_DB_NAME)
+    db = client[env.MONGO_DB_NAME]
+    colls = db.list_collection_names()
+
+    for coll in colls:
+        db[coll].delete_many({})
 
 
