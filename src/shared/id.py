@@ -2,6 +2,12 @@ from uuid import UUID, uuid4
 
 
 class Id:
+    """
+    Id is a value object that represents a unique identifier. It can be initialized with a UUID value
+    or a string representation of a UUID. If no value is provided, a new UUID will be generated.
+
+    Id objects can be compared for equality with other Id objects.
+    """
 
     value: UUID
 

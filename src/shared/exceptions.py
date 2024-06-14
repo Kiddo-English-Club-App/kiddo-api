@@ -1,3 +1,8 @@
+"""
+This module contains custom exceptions for the application domain.
+
+These exceptions are used to represent business errors and are raised by domain related operations.
+"""
 class DomainException(Exception):
     """
     Base class for bussiness errors

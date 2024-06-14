@@ -1,4 +1,8 @@
 class Range:
+    """
+    A class to represent a range of values. It keeps track of the minimum and maximum values
+    that have been set, and updates them as the current value changes.
+    """
     __current: float = 0
     __min: float = 0
     __max: float = 0

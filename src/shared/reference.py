@@ -3,6 +3,11 @@ from shared.id import Id
 
 
 class Ref[T](ABC):
+    """
+    Ref is an abstract class that represents a reference to a value that can be fetched
+    from an external source. It provides a lazy loading mechanism to fetch the value
+    only when it is needed.
+    """
     id: Id
     __value: T
 
