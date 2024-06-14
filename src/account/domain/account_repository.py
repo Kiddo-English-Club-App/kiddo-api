@@ -10,29 +10,20 @@ from .account import Account
 
 class IAccountRepository(ABC):
     """
-    Interface for Account Repository.
+    Interface for account repositories. Account repositories are responsible for
+    persisting and retrieving account entities from a data store.
+
+    The account repository provides an abstraction over the data access layer,
+    allowing for different implementations to be used interchangeably in the application.
     """
 
     @abstractmethod
     def find_by_id(self, id: Id) -> Account | None:
         """
-        Finds an account by its id.
+        Finds an account by its id. If the account does not exist, returns None.
 
-        Args:
-            id (Id): The id of the account.
-        
-        Returns:
-            The account entity if found, None otherwise.
-        """
-        pass
-
-    @abstractmethod
-    def find_all(self) -> list[Account]:
-        """
-        Finds all accounts.
-
-        Returns:
-            A list of all account entities.
+        :param id: The id of the account.
+        :return: The account entity if found, None otherwise.
         """
         pass
 
@@ -41,8 +32,7 @@ class IAccountRepository(ABC):
         """
         Saves or updates an account entity.
 
-        Args:
-            entity (Account): The account entity to save.
+        :param entity: The account entity to save or update.
         """
         pass
 
@@ -51,24 +41,18 @@ class IAccountRepository(ABC):
         """
         Deletes an account by its id.
 
-        Args:
-            id (UUID): The id of the account.
-        
-        Returns:
-            True if the account was deleted, False otherwise.
+        :param id: The id of the account to delete.
+        :return: True if the account was deleted, False otherwise
         """
         pass
     
     @abstractmethod
-    def find_by_email(self, email: str) -> Account:
+    def find_by_email(self, email: str) -> Account | None:
         """
         Finds an account by its email.
 
-        Args:
-            email (str): The email of the account.
-        
-        Returns:
-            The account entity if found, None otherwise.
+        :param email: The email of the account.
+        :return: The account entity if found, None otherwise.
         """
         pass
 
@@ -77,18 +61,19 @@ class IAccountRepository(ABC):
         """
         Creates a reference to an account entity.
 
-        Args:
-            id (UUID): The id of the account.
-        
-        Returns:
-            A reference to the account entity.
+        :param id: The id of the account.
+        :return: A reference to the account entity.
         """
         pass
 
 
 class AccountRef(Ref[Account]):
     """
-    Account Reference.
+    Reference to an account entity. This class provides a way to reference an account entity
+    without loading it from the repository until necessary.
+
+    It allows for lazy loading of the account entity when needed, reducing the number of 
+    unnecessary database queries in the application.
     """
     def __init__(self, id: Id, repository: IAccountRepository):
         super().__init__(id)

@@ -8,6 +8,15 @@ from ..application.token_service import TokenService
 
 
 class RequestAppContext(AppContext):
+    """
+    RequestAppContext is an implementation of the AppContext interface that provides
+    access to the current user identity and account type based on the request context.
+
+    It uses the token service to read and validate the token from the request headers.
+
+    The identity and account type are loaded lazily when requested for the first time.
+    and cached for subsequent calls.
+    """
     _identity: Id = None
     _account_type: AccountType = None
 
@@ -15,6 +24,13 @@ class RequestAppContext(AppContext):
         self.token_service = token_service
 
     def _load_token(self):
+        """
+        Load the token from the request headers and extract the identity and account type.
+        If the token is not found or invalid, an Unauthenticated exception is raised to
+        indicate that the user is not authenticated.
+
+        :raises Unauthenticated: If the token is not found or invalid.
+        """
         authorization = request.authorization
         if not authorization:
             raise Unauthenticated("Token not found")
