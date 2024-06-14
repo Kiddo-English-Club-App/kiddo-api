@@ -1,10 +1,16 @@
 from uuid import UUID
+
 from pydantic import BaseModel
 
 from .application import dto
 
 
 class ItemDto(BaseModel):
+    """
+    ItemDto is a data transfer object that represents an item in the theme.
+    It contains the identifier, name, image, and sound associated with the item.
+    """
+
     id: UUID
     name: str
     image: str
@@ -13,10 +19,7 @@ class ItemDto(BaseModel):
     @staticmethod
     def from_entity(item: dto.Item):
         return ItemDto(
-            id=item.id.value,
-            name=item.name,
-            image=item.image,
-            sound=item.sound
+            id=item.id.value, name=item.name, image=item.image, sound=item.sound
         )
 
 
@@ -36,5 +39,5 @@ class ThemeDto(BaseModel):
             description=theme.description,
             image=theme.image,
             background=theme.background,
-            items=[ItemDto.from_entity(item) for item in theme.items]
+            items=[ItemDto.from_entity(item) for item in theme.items],
         )

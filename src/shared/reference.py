@@ -17,6 +17,12 @@ class Ref[T](ABC):
 
     @abstractmethod
     def fetch(self) -> T:
+        """
+        Fetches the value from an external source. This method should be implemented by
+        subclasses to provide the actual fetching logic.
+
+        :return: The value fetched from the external source.
+        """
         pass
     
     @property
