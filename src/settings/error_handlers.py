@@ -27,9 +27,12 @@ def handle_domain_exception(error: exc.DomainException):
 
 
 def handle_exception(e: Exception):
+    error_message = "An unexpected error occurred. Please try again later."
+    if env.is_development() or env.is_testing():
+        error_message = [error_message, str(e)]
     return {
         "error": "internal_server_error",
-        "message": "Internal server error"
+        "message": error_message
     }, 500
         
         
