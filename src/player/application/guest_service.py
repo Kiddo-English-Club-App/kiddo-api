@@ -48,12 +48,12 @@ class GuestService:
         if not guest:
             raise NotFound("Guest not found")
         
-        validate(self.app_context, AdminOrSameUserPermission(AccountType.ADMIN, guest.host))
+        validate(self.app_context, AdminOrSameUserPermission(guest.host))
 
         return dto.GuestDto.from_entity(guest)
 
     def get_guests(self, host_id: Id) -> list[dto.GuestDto]:
-        validate(self.app_context, AdminOrSameUserPermission(AccountType.ADMIN, host_id))
+        validate(self.app_context, AdminOrSameUserPermission(host_id))
         
         guests = self.guest_repository.find_all(host_id)
         return [dto.GuestDto.from_entity(guest) for guest in guests]
@@ -64,7 +64,7 @@ class GuestService:
         if not guest:
             raise NotFound("Guest not found")
         
-        validate(self.app_context, AdminOrSameUserPermission(AccountType.ADMIN, guest.host))
+        validate(self.app_context, AdminOrSameUserPermission(guest.host))
         
         return [dto.AchievementDto.from_entity(achievement) for achievement in guest.achievements]
     

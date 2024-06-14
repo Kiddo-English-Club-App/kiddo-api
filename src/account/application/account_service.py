@@ -1,7 +1,7 @@
 # Account service
 # This module provides the service layer for account management, encapsulating business logic 
 # for account operations such as creation, and ensuring separation of concerns.
-from account.domain.account import Account, AccountType
+from account.domain.account import Account
 from account.domain.account_repository import IAccountRepository
 from shared.id import Id
 from shared.exceptions import InvalidCredentials, NotFound, AlreadyExists
@@ -63,7 +63,7 @@ class AccountService:
         """
 
         # Validate that the current user has permission to access the account
-        validate(self.app_context, AdminOrSameUserPermission(AccountType.ADMIN, id))
+        validate(self.app_context, AdminOrSameUserPermission(id))
         
         account = self.account_repository.find_by_id(id)
 
