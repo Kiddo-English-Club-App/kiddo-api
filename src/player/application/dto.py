@@ -18,10 +18,7 @@ class GuestDto:
     @staticmethod
     def from_entity(guest: Guest):
         return GuestDto(
-            id=guest.id,
-            name=guest.name,
-            host=guest.host,
-            image=guest.image
+            id=guest.id, name=guest.name, host=guest.host, image=guest.image
         )
 
 
@@ -47,7 +44,7 @@ class ScoreDto:
             points=score.points.current,
             time=score.time.current,
             elements=score.elements,
-            theme_id=score.theme.id
+            theme_id=score.theme.id,
         )
 
 
@@ -70,7 +67,7 @@ class ScoreDataDto:
             points=score.points.current,
             time=score.time.current,
             elements=score.elements,
-            theme_name=score.theme.value.name
+            theme_name=score.theme.value.name,
         )
 
 
@@ -94,7 +91,8 @@ class AchievementDto:
     @staticmethod
     def from_entity(achievement: Achievement) -> "AchievementDto":
         return AchievementDto(
-            id=achievement.id, 
-            theme=achievement.theme.value.name, 
+            id=achievement.id,
+            theme=achievement.theme.value.name,
             value=achievement.value,
-            message=str(achievement))
+            message=str(achievement),
+        )

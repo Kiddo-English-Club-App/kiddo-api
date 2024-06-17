@@ -1,5 +1,5 @@
 from uuid import UUID
-from pydantic import BaseModel, ConfigDict, field_validator, field_serializer
+from pydantic import BaseModel, ConfigDict, field_validator
 from shared.id import Id
 
 
@@ -12,11 +12,9 @@ class GuestDto(BaseModel):
     @staticmethod
     def load(guest):
         return GuestDto(
-            id=guest.id.value,
-            name=guest.name,
-            host=guest.host.value,
-            image=guest.image
+            id=guest.id.value, name=guest.name, host=guest.host.value, image=guest.image
         )
+
 
 class CreateGuestDto(BaseModel):
     name: str
@@ -38,7 +36,7 @@ class AchievementDto(BaseModel):
             id=achievement.id.value,
             value=achievement.value,
             message=achievement.message,
-            theme=achievement.theme
+            theme=achievement.theme,
         )
 
 
@@ -54,11 +52,11 @@ class ScoreDataDto(BaseModel):
             points=score.points,
             time=score.time,
             elements=score.elements,
-            theme_name=score.theme_name)
+            theme_name=score.theme_name,
+        )
 
 
 class ReportDto(BaseModel):
-
     guest_id: UUID
     avg_points: float
     avg_time: float
@@ -72,8 +70,9 @@ class ReportDto(BaseModel):
             avg_points=report.avg_points,
             avg_time=report.avg_time,
             top_scores=[ScoreDataDto.load(score) for score in report.top_scores],
-            bottom_scores=[ScoreDataDto.load(score) for score in report.bottom_scores])
-    
+            bottom_scores=[ScoreDataDto.load(score) for score in report.bottom_scores],
+        )
+
 
 class AddScoreDto(BaseModel):
     guest_id: Id
@@ -91,7 +90,7 @@ class AddScoreDto(BaseModel):
 class ScoreDto(BaseModel):
     class ThemeInner(BaseModel):
         id: UUID
-    
+
     guest_id: UUID
     points: float
     time: float
@@ -105,5 +104,5 @@ class ScoreDto(BaseModel):
             points=score.points,
             time=score.time,
             elements=score.elements,
-            theme=ScoreDto.ThemeInner(id=score.theme_id.value)
+            theme=ScoreDto.ThemeInner(id=score.theme_id.value),
         )
