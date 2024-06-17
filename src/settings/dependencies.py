@@ -110,4 +110,4 @@ def delete_db():
     for coll in colls:
         db[coll].delete_many({})
 
-    logger().logger().info("Database deleted")
+    logger().info("Database deleted")
