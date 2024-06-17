@@ -10,5 +10,5 @@ COPY mock/ /app/mock
 
 EXPOSE 5000
 
-CMD ["gunicorn","-w","3","main:create_app()","-b","0.0.0.0:5000"]
+CMD ["gunicorn","-w","4","main:create_app()","-b","0.0.0.0:5000"]
 #CMD ["python","main.py"]
