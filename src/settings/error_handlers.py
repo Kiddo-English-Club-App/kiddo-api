@@ -1,4 +1,7 @@
-# Init must be called first to initialize the module
+"""
+This module contains the error handlers for the application to handle exceptions and errors.
+Provides a centralized location to handle exceptions and errors that occur in the application.
+"""
 
 from werkzeug.exceptions import HTTPException
 from pydantic import ValidationError
@@ -18,36 +21,23 @@ def handle_domain_exception(error: exc.DomainException):
             status_code = 403
         case _:
             status_code = 400
-    
-    return {
-        "error": error.title,
-        "message": error.message
-    }, status_code
 
+    return {"error": error.title, "message": error.message}, status_code
 
 
 def handle_exception(e: Exception):
     error_message = "An unexpected error occurred. Please try again later."
     if env.is_development() or env.is_testing():
         error_message = [error_message, str(e)]
-    return {
-        "error": "internal_server_error",
-        "message": error_message
-    }, 500
-        
-        
+    return {"error": "internal_server_error", "message": error_message}, 500
+
+
 def handle_validation_error(e: ValidationError):
-    return {
-        "error": "validation_error",
-        "message": e.errors(include_url=False)
-    }, 400
+    return {"error": "validation_error", "message": e.errors(include_url=False)}, 400
 
 
 def handle_http_exception(e: HTTPException):
-    return {
-        "error": e.name.lower().replace(" ", "_"),
-        "message": e.description
-    }, 404
+    return {"error": e.name.lower().replace(" ", "_"), "message": e.description}, 404
 
 
 def init(app):

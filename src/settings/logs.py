@@ -1,6 +1,6 @@
 def init():
     import logging
-    from .environment import env, EnvType
+    from .environment import env
 
     logging.basicConfig(format='%(message)s')
     logging.getLogger().addFilter(logging.Filter('kiddo'))
@@ -12,7 +12,7 @@ def init():
     logger.addHandler(stream_handler)
     logger.propagate = False
     
-    if env.ENV == EnvType.DEVELOPMENT:
+    if not env.is_production():
         logger.setLevel(logging.DEBUG)
     else:
         logger.setLevel(logging.INFO)

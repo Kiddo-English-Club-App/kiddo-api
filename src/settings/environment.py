@@ -1,4 +1,8 @@
-# Init must be called first to initialize the module
+"""
+This module is responsible for setting up the environment variables for the application.
+It also provides a class to represent the environment and a function to initialize the environment.
+"""
+
 from enum import StrEnum
 
 
@@ -6,6 +10,7 @@ class EnvType(StrEnum):
     PRODUCTION = "production"
     DEVELOPMENT = "development"
     TESTING = "testing"
+
 
 class Environment:
     MONGO_URI: str
@@ -28,15 +33,18 @@ class Environment:
 
     def is_development(self):
         return self.ENV == EnvType.DEVELOPMENT
-    
+
     def is_production(self):
         return self.ENV == EnvType.PRODUCTION
 
+
 env = Environment()
+
 
 def init(app):
     import os
     from dotenv import load_dotenv
+
     load_dotenv(override=True)
 
     env.MONGO_URI = os.getenv("KIDDO_MONGO_URI")
@@ -52,4 +60,3 @@ def init(app):
     env.S3_SECRET_KEY = os.getenv("KIDDO_S3_SECRET_KEY")
     env.S3_REGION_NAME = os.getenv("KIDDO_S3_REGION_NAME")
     env.S3_BUCKET_NAME = os.getenv("KIDDO_S3_BUCKET_NAME")
-    
