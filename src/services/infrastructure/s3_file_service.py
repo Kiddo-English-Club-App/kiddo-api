@@ -10,22 +10,26 @@ from ..application.file_service import FileService
 
 
 class S3FileService(FileService):
-
+    """
+    S3FileService is an implementation of the FileService interface that provides methods
+    for working with files stored in an S3 bucket. It uses the boto3 library to interact
+    with the S3 service.
+    """
 
     def __init__(self, app_context: AppContext):
         self.client = boto3.client(
-            service_name ="s3",
-            endpoint_url = env.S3_ENDPOINT_URL,
-            aws_access_key_id = env.S3_ACCESS_KEY_ID,
-            aws_secret_access_key = env.S3_SECRET_KEY,
-            region_name=env.S3_REGION_NAME, # Must be one of: wnam, enam, weur, eeur, apac, auto
+            service_name="s3",
+            endpoint_url=env.S3_ENDPOINT_URL,
+            aws_access_key_id=env.S3_ACCESS_KEY_ID,
+            aws_secret_access_key=env.S3_SECRET_KEY,
+            region_name=env.S3_REGION_NAME,  # Must be one of: wnam, enam, weur, eeur, apac, auto
         )
         self.app_context = app_context
 
     def get_file(self, file_name: str) -> File:
         if not self.app_context.authenticated():
             raise Unauthenticated("Not authenticated")
-        
+
         if os.path.exists(f"cache/{file_name}"):
             with open(f"cache/{file_name}", "rb") as file:
                 print("Cache hit")
@@ -42,5 +46,3 @@ class S3FileService(FileService):
             if e.response["Error"]["Code"] == "NoSuchKey":
                 raise NotFound("File not found")
             raise e
-    
-    

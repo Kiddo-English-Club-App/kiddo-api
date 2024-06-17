@@ -7,6 +7,11 @@ from ..application.file_service import FileService
 
 
 class MockFileService(FileService):
+    """
+    MockFileService is an implementation of the FileService interface that provides methods
+    for working with files in a mock environment. It is used for testing and development
+    purposes where the actual file system is not accessible.
+    """
 
     def get_file(self, file_name: str) -> File:
         name = "mock"
@@ -16,7 +21,7 @@ class MockFileService(FileService):
             name += ".png"
         elif file_name.endswith(".mp3"):
             name += ".mp3"
-        
+
         if not os.path.exists(f"{env.MOCK_DIR}/{name}"):
             raise exceptions.NotFound(f"File {file_name} not found")
 

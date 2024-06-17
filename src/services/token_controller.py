@@ -1,3 +1,7 @@
+"""
+This module contains the token controller, which is responsible for handling the token validation endpoint.
+"""
+
 from flask import Blueprint, request
 from dependify import inject
 
@@ -5,7 +9,7 @@ from account.application.token_service import TokenService
 from .dto import TokenValidation
 
 
-controller = Blueprint('services', __name__)
+controller = Blueprint("services", __name__)
 
 
 @controller.post("/validation/token")
