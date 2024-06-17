@@ -98,6 +98,7 @@ def populate_db():
 
 def delete_db():
     from .environment import env, EnvType
+    from .logs import logger
 
     if env.ENV != EnvType.TESTING:
         raise Exception("This method should only be called in the testing environment")
@@ -108,3 +109,5 @@ def delete_db():
 
     for coll in colls:
         db[coll].delete_many({})
+
+    logger().logger().info("Database deleted")
