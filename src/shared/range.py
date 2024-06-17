@@ -3,6 +3,7 @@ class Range:
     A class to represent a range of values. It keeps track of the minimum and maximum values
     that have been set, and updates them as the current value changes.
     """
+
     __current: float = 0
     __min: float = 0
     __max: float = 0
@@ -15,15 +16,15 @@ class Range:
     @property
     def max(self):
         return self.__max
-    
+
     @property
     def min(self):
         return self.__min
-    
+
     @property
     def current(self):
         return self.__current
-    
+
     @current.setter
     def current(self, value):
         self.__current = value

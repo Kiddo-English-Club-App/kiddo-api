@@ -20,12 +20,12 @@ class Id:
             self.value = value
         else:
             raise ValueError(f"Invalid value for Id {value}")
-    
+
     def __eq__(self, other) -> bool:
         return isinstance(other, Id) and self.value == other.value
-    
+
     def __str__(self) -> str:
         return str(self.value)
-    
+
     def __repr__(self) -> str:
         return f"Id({self.value})"

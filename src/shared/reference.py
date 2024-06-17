@@ -8,6 +8,7 @@ class Ref[T](ABC):
     from an external source. It provides a lazy loading mechanism to fetch the value
     only when it is needed.
     """
+
     id: Id
     __value: T
 
@@ -24,7 +25,7 @@ class Ref[T](ABC):
         :return: The value fetched from the external source.
         """
         pass
-    
+
     @property
     def value(self) -> T:
         if self.__value is None:

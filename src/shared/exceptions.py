@@ -3,13 +3,17 @@ This module contains custom exceptions for the application domain.
 
 These exceptions are used to represent business errors and are raised by domain related operations.
 """
+
+
 class DomainException(Exception):
     """
     Base class for bussiness errors
     """
+
     message: str
     title: str
-    def __init__(self, message, title = "error"):
+
+    def __init__(self, message, title="error"):
         self.message = message
         self.title = title
         super().__init__(message)
