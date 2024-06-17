@@ -30,7 +30,7 @@ class TokenService(ABC):
         :return: A string containing the generated refresh token.
         """
         pass
-    
+
     @abstractmethod
     def verify_token(self, token: str) -> bool:
         """
@@ -50,6 +50,3 @@ class TokenService(ABC):
         :return: A dictionary containing the token payload.
         """
         pass
-
-
-

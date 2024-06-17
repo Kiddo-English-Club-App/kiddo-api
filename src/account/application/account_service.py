@@ -1,5 +1,5 @@
 # Account service
-# This module provides the service layer for account management, encapsulating business logic 
+# This module provides the service layer for account management, encapsulating business logic
 # for account operations such as creation, and ensuring separation of concerns.
 from account.domain.account import Account
 from account.domain.account_repository import IAccountRepository
@@ -16,11 +16,11 @@ class AccountService:
     It interacts with the account repository to persist account data and utilizes
     application context for cross-cutting concerns like logging and security.
     """
-    
+
     def __init__(self, account_repository: IAccountRepository, app_context: AppContext):
         """
         Initializes the AccountService with necessary dependencies.
-        
+
         :param account_repository: The repository interface for account data operations.
         :param app_context: Shared application context for accessing current user information.
         """
@@ -35,7 +35,7 @@ class AccountService:
         :return: An AccountDto object representing the newly created account.
         :raises AlreadyExists: If an account with the provided email already exists.
         """
-        
+
         # Check if an account with the given email already exists to prevent duplicates
         if self.account_repository.find_by_email(data.email):
             raise AlreadyExists("Account already exists")
@@ -44,7 +44,7 @@ class AccountService:
             first_name=data.first_name,
             last_name=data.last_name,
             email=data.email,
-            password=data.password
+            password=data.password,
         )
 
         self.account_repository.save(account)
@@ -54,7 +54,7 @@ class AccountService:
 
     def get_account(self, id: Id) -> dto.AccountDto:
         """
-        Retrieves an account by its unique identifier. Only admins or the account owner can 
+        Retrieves an account by its unique identifier. Only admins or the account owner can
         access the account.
 
         :param id: The unique identifier of the account to retrieve.
@@ -64,12 +64,12 @@ class AccountService:
 
         # Validate that the current user has permission to access the account
         validate(self.app_context, AdminOrSameUserPermission(id))
-        
+
         account = self.account_repository.find_by_id(id)
 
         if account is None:
             raise NotFound("Account not found")
-        
+
         # Return the account as a DTO to hide sensitive information
         return dto.AccountDto.from_entity(account)
 
@@ -84,8 +84,8 @@ class AccountService:
 
         # Find the account by email and check if the password matches
         account = self.account_repository.find_by_email(data.email)
-        
+
         if account and account.password == data.password:
             return dto.AccountDto.from_entity(account)
-        
+
         raise InvalidCredentials

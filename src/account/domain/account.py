@@ -8,9 +8,10 @@ from shared.account_type import AccountType
 class Account:
     """
     Account domain model. Represents a user account in the system. It contains basic information
-    about the user such as name, email, password, and account type. The account type determines 
+    about the user such as name, email, password, and account type. The account type determines
     the level of access and permissions the user has within the system.
     """
+
     id: Id
     first_name: NameStr
     last_name: NameStr
@@ -19,14 +20,14 @@ class Account:
     account_type: AccountType
 
     def __init__(
-            self,
-            first_name: str,
-            last_name: str,
-            email: str,
-            password: PasswordStr | str,
-            id: Id = None,
-            account_type: AccountType = AccountType.USER
-            ):
+        self,
+        first_name: str,
+        last_name: str,
+        email: str,
+        password: PasswordStr | str,
+        id: Id = None,
+        account_type: AccountType = AccountType.USER,
+    ):
         """
         Initializes an Account object with the provided data. The ID is optional as it will be
         generated automatically if not provided.
@@ -50,4 +51,4 @@ class Account:
         if not isinstance(other, Account):
             return False
 
-        return self.id == other.id    
+        return self.id == other.id

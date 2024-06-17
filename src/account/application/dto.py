@@ -12,6 +12,7 @@ class CreateAccountDto(Protocol):
     but doesn't provide any implementation details so that it can be used as a type hint
     or implemented with external libraries like Pydantic or dataclasses.
     """
+
     first_name: str
     last_name: str
     password: str
@@ -26,6 +27,7 @@ class AuthenticateDto(Protocol):
     but doesn't provide any implementation details so that it can be used as a type hint
     or implemented with external libraries like Pydantic or dataclasses.
     """
+
     email: str
     password: str
 
@@ -41,6 +43,7 @@ class AccountDto:
     It's implemented as a dataclass to provide a simple way to create immutable objects and
     decouple the DTO from any external libraries or frameworks.
     """
+
     id: Id
     first_name: str
     last_name: str
@@ -50,9 +53,9 @@ class AccountDto:
     @property
     def full_name(self) -> str:
         return f"{self.first_name} {self.last_name}"
-    
+
     @staticmethod
-    def from_entity(entity: Account) -> 'AccountDto':
+    def from_entity(entity: Account) -> "AccountDto":
         """
         Creates a new AccountDto object from an Account entity.
 
@@ -64,16 +67,17 @@ class AccountDto:
             first_name=entity.first_name,
             last_name=entity.last_name,
             email=entity.email,
-            account_type=entity.account_type
+            account_type=entity.account_type,
         )
-    
+
     def __eq__(self, value: object) -> bool:
         if isinstance(value, (AccountDto, Account)):
-            return \
-                self.id == value.id and \
-                self.first_name == value.first_name and \
-                self.last_name == value.last_name and \
-                self.email == value.email and \
-                self.account_type == value.account_type
-        
+            return (
+                self.id == value.id
+                and self.first_name == value.first_name
+                and self.last_name == value.last_name
+                and self.email == value.email
+                and self.account_type == value.account_type
+            )
+
         return False

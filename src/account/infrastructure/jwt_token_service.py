@@ -32,11 +32,13 @@ class JwtTokenService(TokenService):
             "sub": str(account.id),
             "email": account.email,
             "account_type": account.account_type,
-            "exp": (datetime.now() + timedelta(minutes=env.ACCESS_TOKEN_EXPIRATION)).timestamp()
+            "exp": (
+                datetime.now() + timedelta(minutes=env.ACCESS_TOKEN_EXPIRATION)
+            ).timestamp(),
         }
-        
+
         return jwt.encode(payload, env.ACCESS_TOKEN_SECRET, algorithm="HS256")
-    
+
     def create_refresh_token(self, account: AccountDto) -> str:
         """
         Creates a refresh token for the provided account. The token contains the following claims:
@@ -52,13 +54,13 @@ class JwtTokenService(TokenService):
             "sub": str(account.id),
             "email": account.email,
             "account_type": account.account_type.value,
-            "exp": datetime.now() + timedelta(minutes=env.REFRESH_TOKEN_EXPIRATION)
+            "exp": datetime.now() + timedelta(minutes=env.REFRESH_TOKEN_EXPIRATION),
         }
         return jwt.encode(payload, env.REFRESH_TOKEN_SECRET, algorithm="HS256")
 
     def verify_token(self, token: str) -> bool:
         """
-        Checks if the provided token is valid and not expired. It uses the access token secret key 
+        Checks if the provided token is valid and not expired. It uses the access token secret key
         to verify the token signature and expiration time. If the token is valid, it returns True;
         otherwise, it returns False.
 
@@ -75,7 +77,7 @@ class JwtTokenService(TokenService):
             return False
         except jwt.InvalidTokenError:
             return False
-        
+
     def read_token(self, token: str) -> dict:
         """
         Reads the contents of the provided token. It decodes the token using the access token secret key
@@ -89,4 +91,3 @@ class JwtTokenService(TokenService):
             return jwt.decode(token, env.ACCESS_TOKEN_SECRET, algorithms=["HS256"])
         except jwt.PyJWTError as e:
             raise InvalidToken from e
-        

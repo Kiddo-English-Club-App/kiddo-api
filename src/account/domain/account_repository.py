@@ -1,6 +1,7 @@
 """
 Account Repository Interface Definition.
 """
+
 from abc import ABC, abstractmethod
 
 from shared.id import Id
@@ -45,7 +46,7 @@ class IAccountRepository(ABC):
         :return: True if the account was deleted, False otherwise
         """
         pass
-    
+
     @abstractmethod
     def find_by_email(self, email: str) -> Account | None:
         """
@@ -72,12 +73,13 @@ class AccountRef(Ref[Account]):
     Reference to an account entity. This class provides a way to reference an account entity
     without loading it from the repository until necessary.
 
-    It allows for lazy loading of the account entity when needed, reducing the number of 
+    It allows for lazy loading of the account entity when needed, reducing the number of
     unnecessary database queries in the application.
     """
+
     def __init__(self, id: Id, repository: IAccountRepository):
         super().__init__(id)
         self.__repository = repository
-    
+
     def fetch(self) -> Account:
         return self.__repository.find_by_id(self.id)

@@ -17,6 +17,7 @@ class RequestAppContext(AppContext):
     The identity and account type are loaded lazily when requested for the first time.
     and cached for subsequent calls.
     """
+
     _identity: Id = None
     _account_type: AccountType = None
 
@@ -37,7 +38,7 @@ class RequestAppContext(AppContext):
 
         if not authorization.token:
             raise Unauthenticated("Token not found")
-        
+
         payload = self.token_service.read_token(authorization.token)
         self._identity = Id(payload["sub"])
         self._account_type = AccountType(payload["account_type"])
@@ -46,7 +47,7 @@ class RequestAppContext(AppContext):
         if not self._identity:
             self._load_token()
         return self._identity
-    
+
     def account_type(self) -> AccountType:
         if not self._account_type:
             self._load_token()
